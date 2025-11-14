@@ -7,38 +7,25 @@ export default function About() {
     return (
         <section
             id="sobre"
-            // DE: bg-[#090909] text-white
-            // PARA: bg-background text-foreground (usando background normal)
             className="relative py-16 md:py-24 bg-background text-foreground overflow-hidden"
         >
-            {/* DE: opacity-[0.03] */}
-            {/* PARA: opacidade diferente para claro/escuro */}
             <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-[0.01] dark:opacity-[0.03]" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center">
 
-                    {/* Coluna de texto */}
                     <div className="flex flex-col justify-center gap-6 sm:gap-8 animate-in fade-in-0 slide-in-from-left-8 duration-700">
-                        {/* DE: from-[#d4af37]/20 ... text-[#d4af37] */}
-                        {/* PARA: from-primary/20 ... text-primary */}
                         <span className="inline-block bg-gradient-to-r from-primary/20 to-transparent text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
                             Sobre o Advogado
                         </span>
 
-                        {/* DE: text-white */}
-                        {/* PARA: text-foreground */}
                         <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold leading-tight text-foreground">
                             Emanuel Silvestre
                         </h2>
 
-                        {/* DE: text-white/80 */}
-                        {/* PARA: text-muted-foreground */}
                         <p className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
                             alhum texto aqui que ele é espcalista
                         </p>
-                        {/* DE: text-white/90 */}
-                        {/* PARA: text-muted-foreground */}
                         <div className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl">
                             <p>
                                 nao sei o que colcoar auqi nao sei o que colcoar auqinao sei o que colcoar auqinao sei o que colcoar auqinao sei o que colcoar auqinao sei o que colcoar auqinao sei o que colcoar auqi
@@ -49,12 +36,10 @@ export default function About() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
-                            {/* DE: text-[#d4af37] ... text-white ... text-white/70 */}
-                            {/* PARA: text-primary ... text-foreground ... text-muted-foreground */}
                             <div className="flex items-start gap-3">
                                 <Award className="size-7 text-primary shrink-0 mt-1" />
                                 <div>
-                                    <h4 className="font-semibold text-foreground">+10 Anos de Experiência</h4>
+                                    <h4 className="font-semibold text-foreground">+3 Anos de Experiência</h4>
                                     <p className="text-muted-foreground text-sm">
                                         Atuação sólida em Direito Civil, Contratual e Empresarial.
                                     </p>
@@ -93,8 +78,6 @@ export default function About() {
                             <Button
                                 asChild
                                 size="lg"
-                                // DE: bg-[#d4af37] hover:bg-[#c9a234] text-black ... shadow-[#d4af37]/20
-                                // PARA: (Remove cores) ... shadow-primary/20
                                 className="font-semibold px-8 py-4 text-base rounded-xl transition-all duration-300 hover:scale-105 shadow-lg shadow-primary/20"
                             >
                                 <Link href="#contato">
@@ -105,11 +88,8 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* DE: shadow-black/30 */}
-                    {/* PARA: shadow-lg (genérico) */}
                     <div className="relative w-full max-w-md mx-auto md:max-w-none md:mx-0 xl:max-w-md aspect-[4/5] group rounded-3xl overflow-hidden shadow-lg animate-in fade-in-0 slide-in-from-right-8 duration-700">
-                        {/* DE: from-[#d4af37]/20 */}
-                        {/* PARA: from-primary/20 */}
+
                         <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent blur-2xl -z-10" />
                         <Image
                             src="professional-lawyer-office.png"
@@ -117,10 +97,8 @@ export default function About() {
                             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                             fill
                         />
-                        {/* ATENÇÃO: Overlay escuro mantido para dar contraste ao texto branco por cima da imagem */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700" />
 
-                        {/* ATENÇÃO: Textos mantidos em text-white por estarem em cima da imagem/overlay escuro */}
                         <div className="absolute bottom-8 left-8 right-8 text-white space-y-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700">
                             <h4 className="text-2xl font-semibold tracking-tight">
                                 Excelência e Confiança
@@ -129,8 +107,6 @@ export default function About() {
                                 Advocacia com foco em resultados, transparência e ética em cada etapa do processo.
                             </p>
                         </div>
-                        {/* DE: bg-[#d4af37]/90 text-black */}
-                        {/* PARA: bg-primary text-primary-foreground */}
                         <div className="absolute top-6 left-6 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium tracking-wide shadow-md">
                             Advocacia Civil & Empresarial
                         </div>
