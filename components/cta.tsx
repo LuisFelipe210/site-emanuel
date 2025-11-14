@@ -67,7 +67,7 @@ export default function CTA() {
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsLoading(true) // Desativa o botão
+        setIsLoading(true)
 
         try {
             const response = await fetch('/api/send-email', {
@@ -90,7 +90,7 @@ export default function CTA() {
 
         } catch (error) {
             toast({
-                title: "Ah, que desgraça!", // A PEROSNALIDADE AQUI KKKK
+                title: "Erro ao Enviar",
                 description: "Houve um problema ao enviar sua mensagem. Tente novamente.",
                 variant: "destructive",
             });
@@ -102,8 +102,6 @@ export default function CTA() {
     return (
         <section
             id="contato"
-            // DE: bg-[#111111] text-white
-            // PARA: bg-muted text-foreground (contraste leve)
             className="relative py-16 sm:py-24 overflow-hidden bg-muted text-foreground"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,36 +110,24 @@ export default function CTA() {
 
                     <div className="flex flex-col gap-6 pt-0 lg:pt-4 animate-in fade-in-0 slide-in-from-left-8 duration-700">
                         <div>
-                            {/* DE: text-[#d4af37] */}
-                            {/* PARA: text-primary */}
                             <span className="text-primary text-sm font-semibold uppercase tracking-wide">
                                 Entre em Contato
                             </span>
-                            {/* DE: text-white */}
-                            {/* PARA: text-foreground */}
                             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 text-foreground">
                                 Vamos trabalhar juntos
                             </h2>
                         </div>
-                        {/* DE: text-white/70 */}
-                        {/* PARA: text-muted-foreground */}
                         <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
                             Se preferir, entre em contato diretamente através de um dos canais abaixo. Estou disponível para agendar sua consulta.
                         </p>
 
                         <div className="space-y-6 pt-4">
-                            {/* DE: bg-[#d4af37]/10 ... text-[#d4af37] */}
-                            {/* PARA: bg-primary/10 ... text-primary */}
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
                                     <Phone className="text-primary" size={24} />
                                 </div>
                                 <div>
-                                    {/* DE: text-white/70 */}
-                                    {/* PARA: text-muted-foreground */}
                                     <p className="text-muted-foreground text-sm">Telefone</p>
-                                    {/* DE: text-white hover:text-[#d4af37] */}
-                                    {/* PARA: text-foreground hover:text-primary */}
                                     <a href="tel:+5587996128608" className="text-base sm:text-lg font-semibold text-foreground hover:text-primary transition">
                                         (87) 99612-8608
                                     </a>
@@ -167,20 +153,14 @@ export default function CTA() {
                                 </div>
                                 <div>
                                     <p className="text-muted-foreground text-sm">Endereço</p>
-                                    {/* DE: text-white */}
-                                    {/* PARA: text-foreground */}
                                     <p className="text-base sm:text-lg font-semibold text-foreground">Campo Formoso, BA - Brasil</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* DE: bg-[#0a0a0a] */}
-                    {/* PARA: bg-card (que é 'background' no claro e 'card' no escuro) */}
                     <Card className="bg-card p-4 sm:p-6 md:p-8 shadow-xl animate-in fade-in-0 slide-in-from-right-8 duration-700">
                         <CardHeader>
-                            {/* DE: text-white */}
-                            {/* PARA: text-foreground */}
                             <CardTitle className="text-2xl text-foreground">Envie sua Mensagem</CardTitle>
                             <CardDescription>
                                 Preencha o formulário e retornarei o mais breve possível.
@@ -281,8 +261,6 @@ export default function CTA() {
                                         type="submit"
                                         size="lg"
                                         disabled={isLoading}
-                                        // DE: bg-[#d4af37] hover:bg-[#c9a234] text-black
-                                        // PARA: (Remove cores, o <Button> padrão já é o 'primary')
                                         className="w-full font-semibold"
                                     >
                                         {isLoading ? "Enviando..." : "Enviar Mensagem"}
