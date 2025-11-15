@@ -59,7 +59,7 @@ export default function About() {
                                 {/* Descrição */}
                                 <div className="text-sm sm:text-sm md:text-base text-white/90 leading-relaxed overflow-hidden">
                                     <p className="mb-3 sm:mb-3">
-                                        Advogado especializado em Direito Civil e Empresarial, com mais de 10 anos de experiência na resolução estratégica de conflitos e na assessoria jurídica preventiva.
+                                        Advogado especializado em Direito Civil e Previdenciário, com mais de 3 anos de experiência na resolução estratégica de conflitos e na assessoria jurídica preventiva.
                                     </p>
                                     <p>
                                         Atuação focada em resultados concretos, combinando profundo conhecimento técnico com atendimento personalizado e comunicação transparente em todas as etapas do processo.
@@ -114,7 +114,7 @@ export default function About() {
                             <div className="flex items-start gap-3">
                                 <Award className="size-6 sm:size-7 text-primary shrink-0 mt-1" />
                                 <div>
-                                    <h4 className="font-semibold text-foreground text-sm sm:text-base">+10 Anos de Experiência</h4>
+                                    <h4 className="font-semibold text-foreground text-sm sm:text-base">+3 Anos de Experiência</h4>
                                     <p className="text-muted-foreground text-xs sm:text-sm mt-1">
                                         Atuação sólida em Direito Civil, Contratual e Empresarial.
                                     </p>
