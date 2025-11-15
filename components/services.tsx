@@ -218,11 +218,6 @@ export default function Services() {
                                             >
                                                 Agendar Consulta Gratuita
                                             </Button>
-                                            <DialogClose asChild>
-                                                <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
-                                                    Fechar
-                                                </Button>
-                                            </DialogClose>
                                         </div>
                                     </DialogContent>
                                 </Dialog>
@@ -249,7 +244,7 @@ export default function Services() {
                                                     onTouchStart={handleTouchStart}
                                                     onTouchMove={handleTouchMove}
                                                     onTouchEnd={handleTouchEnd}
-                                                    className="relative w-full bg-background rounded-2xl shadow-lg border border-border p-6 flex flex-col justify-between min-h-[500px] overflow-hidden"
+                                                    className="relative w-full bg-background rounded-2xl shadow-lg border border-border p-6 flex flex-col justify-between min-h-[400px] overflow-hidden"
                                                 >
                                                     {/* Gradient Background - Always visible on mobile */}
                                                     <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50`} />
@@ -336,11 +331,6 @@ export default function Services() {
                                                         >
                                                             Agendar Consulta Gratuita
                                                         </Button>
-                                                        <DialogClose asChild>
-                                                            <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
-                                                                Fechar
-                                                            </Button>
-                                                        </DialogClose>
                                                     </div>
                                                 </DialogContent>
                                             </Dialog>
