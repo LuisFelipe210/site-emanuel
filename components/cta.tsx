@@ -140,10 +140,10 @@ export default function CTA() {
                                 <div>
                                     <p className="text-muted-foreground text-sm">Email</p>
                                     <a
-                                        href="mailto:smazen21sv@gmail.com"
+                                        href="mailto:emanuelsilvestre.adv@gmail.com"
                                         className="text-base sm:text-lg font-semibold text-foreground hover:text-primary transition"
                                     >
-                                        smazen21sv@gmail.com
+                                        emanuelsilvestre.adv@gmail.com
                                     </a>
                                 </div>
                             </div>

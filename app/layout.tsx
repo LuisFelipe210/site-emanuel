@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { WhatsappButton } from "@/components/whatsapp-button"
 import { Toaster } from "@/components/ui/toaster"
-// 1. IMPORTAR O PROVIDER
 import { ThemeProvider } from "@/components/theme-provider"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -33,11 +32,10 @@ export default function RootLayout({
     return (
         <html lang="pt-BR" suppressHydrationWarning>
         <body className={`font-sans antialiased`}>
-        {/* 2. ADICIONAR O PROVIDER ENVOLVENDO TUDO */}
         <ThemeProvider
             attribute="class"
-            defaultTheme="dark" /* AQUI, definindo seu tema escuro como padrão */
-            enableSystem={false} /* Desativar o sistema para forçar o seu padrão */
+            defaultTheme="dark"
+            enableSystem={false}
             disableTransitionOnChange
         >
             {children}

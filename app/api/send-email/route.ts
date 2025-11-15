@@ -32,7 +32,7 @@ export async function POST(request: Request) {
             replyTo: email,
             subject: `Nova Mensagem do Site: ${subject}`,
             html: `
-        <h1>Nova Mensagem do Portfólio</h1>
+        <h1>Nova Mensagem do site</h1>
         <p><strong>Nome:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Telefone:</strong> ${phone}</p>

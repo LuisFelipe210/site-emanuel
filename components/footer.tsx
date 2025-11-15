@@ -65,8 +65,8 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-gray-400 dark:text-gray-600 text-sm">Email</p>
-                                    <a href="mailto:smazen21sv@gmail.com" className="text-sm font-medium text-white dark:text-gray-900 hover:text-primary dark:hover:text-[#d4af37] transition">
-                                        smazen21sv@gmail.com
+                                    <a href="mailto:emanuelsilvestre.adv@gmail.com" className="text-sm font-medium text-white dark:text-gray-900 hover:text-primary dark:hover:text-[#d4af37] transition">
+                                        emanuelsilvestre.adv@gmail.com
                                     </a>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ export default function Footer() {
                             >
                                 <Linkedin size={20} />
                             </a>
-                            <a href="mailto:smazen21sv@gmail.com"
+                            <a href="mailto:emanuelsilvestre.adv@gmail.com"
                                className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center hover:bg-primary/20
                                           dark:bg-[#d4af37]/10 dark:text-[#d4af37] dark:hover:bg-[#d4af37]/20 transition"
                             >

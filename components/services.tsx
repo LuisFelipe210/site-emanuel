@@ -22,6 +22,9 @@ const services = [
             "Atuação completa em causas cíveis, indenizações, responsabilidade civil e contratos.",
         details:
             "Prestamos assessoria jurídica completa em todas as áreas do Direito Civil, com foco em soluções estratégicas e resultados práticos para nossos clientes.",
+        gradient: "from-blue-500/10 via-blue-500/5 to-transparent",
+        iconBg: "bg-gradient-to-br from-blue-500/20 to-blue-600/10",
+        iconColor: "text-blue-600 dark:text-blue-400"
     },
     {
         icon: Briefcase,
@@ -30,6 +33,9 @@ const services = [
             "Consultoria para empresas, contratos, compliance e resolução de conflitos societários.",
         details:
             "Auxiliamos empresas de todos os portes na estruturação jurídica de suas operações, elaboração e revisão de contratos, governança corporativa e defesa em litígios empresariais.",
+        gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
+        iconBg: "bg-gradient-to-br from-purple-500/20 to-purple-600/10",
+        iconColor: "text-purple-600 dark:text-purple-400"
     },
     {
         icon: Scale,
@@ -38,6 +44,9 @@ const services = [
             "Defesa e orientação em demandas trabalhistas de empregados e empregadores.",
         details:
             "Atendimento estratégico em ações trabalhistas, acordos extrajudiciais e consultoria preventiva para minimizar riscos e litígios futuros.",
+        gradient: "from-amber-500/10 via-amber-500/5 to-transparent",
+        iconBg: "bg-gradient-to-br from-amber-500/20 to-amber-600/10",
+        iconColor: "text-amber-600 dark:text-amber-400"
     },
     {
         icon: FileText,
@@ -46,6 +55,9 @@ const services = [
             "Elaboração, revisão e negociação de contratos com segurança e clareza jurídica.",
         details:
             "Elaboramos e revisamos contratos com linguagem clara e foco em segurança jurídica, evitando cláusulas abusivas e protegendo seus interesses.",
+        gradient: "from-emerald-500/10 via-emerald-500/5 to-transparent",
+        iconBg: "bg-gradient-to-br from-emerald-500/20 to-emerald-600/10",
+        iconColor: "text-emerald-600 dark:text-emerald-400"
     },
 ]
 
@@ -85,24 +97,18 @@ export default function Services() {
     }
 
     return (
-        // DE: bg-[#111111] text-white
-        // PARA: bg-muted text-foreground (usando 'muted' para dar um leve contraste)
-        <section id="servicos" className="relative py-16 md:py-20 bg-muted text-foreground">
+        <section id="servicos" className="relative py-16 md:py-20 bg-muted text-foreground overflow-hidden">
+            <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-[0.01] dark:opacity-[0.03]" />
+
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                 <div>
                     <div className="text-center mb-16">
-                        {/* DE: text-[#d4af37] */}
-                        {/* PARA: text-primary */}
                         <span className="text-primary text-sm font-semibold uppercase tracking-wide">
                             Áreas de Atuação
                         </span>
-                        {/* DE: text-white */}
-                        {/* PARA: text-foreground */}
                         <h2 className="text-3xl md:text-5xl font-bold mt-2 text-foreground">
                             Serviços Especializados em Direito
                         </h2>
-                        {/* DE: text-white/70 */}
-                        {/* PARA: text-muted-foreground */}
                         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
                             Soluções jurídicas estratégicas e personalizadas para cada necessidade, com ética, técnica e comprometimento.
                         </p>
@@ -118,32 +124,27 @@ export default function Services() {
                                     open={openService === service.title}
                                     onOpenChange={(open) => setOpenService(open ? service.title : null)}
                                 >
-                                    {/* DE: bg-gradient-to-b from-[#1a1a1a] via-[#121212] to-[#0a0a0a] ... border border-[#2a2a2a] ... hover:shadow-[#d4af37]/20 */}
-                                    {/* PARA: bg-background ... border border-border ... hover:shadow-primary/20 */}
-                                    <div
-                                        className="w-full h-full bg-background rounded-xl shadow-lg border border-border p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20"
-                                    >
-                                        <div className="flex flex-col items-start text-left gap-5">
-                                            {/* DE: bg-[#d4af37]/15 border-[#d4af37]/40 ... text-[#d4af37] */}
-                                            {/* PARA: bg-primary/15 border-primary/40 ... text-primary */}
-                                            <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-primary/15 border border-primary/40">
-                                                <Icon className="text-primary" size={36} />
+                                    <div className="group relative w-full h-full bg-background rounded-2xl shadow-lg border border-border p-7 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 overflow-hidden min-h-[420px]">
+                                        {/* Gradient Background Overlay */}
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                                        <div className="relative z-10 flex flex-col items-start text-left gap-5">
+                                            <div className={`w-16 h-16 flex items-center justify-center rounded-xl ${service.iconBg} border border-transparent group-hover:border-current group-hover:scale-110 transition-all duration-500 shadow-lg`}>
+                                                <Icon className={service.iconColor} size={32} strokeWidth={2} />
                                             </div>
-                                            {/* DE: text-white */}
-                                            {/* PARA: text-foreground */}
-                                            <h3 className="text-2xl font-semibold text-foreground">{service.title}</h3>
-                                            {/* DE: text-white/70 */}
-                                            {/* PARA: text-muted-foreground */}
-                                            <p className="text-muted-foreground text-base leading-relaxed">{service.description}</p>
+                                            <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                                                {service.title}
+                                            </h3>
+                                            <p className="text-muted-foreground text-sm leading-relaxed">
+                                                {service.description}
+                                            </p>
                                         </div>
 
-                                        <div className="mt-8 flex flex-col gap-4">
+                                        <div className="relative z-10 mt-8 flex flex-col gap-3">
                                             <DialogTrigger asChild>
-                                                {/* DE: text-[#d4af37] border-[#d4af37] hover:bg-[#d4af37]/20 hover:text-white */}
-                                                {/* PARA: variant="outline" (remove cores, usa padrão) text-primary border-primary hover:bg-accent hover:text-primary */}
                                                 <Button
                                                     variant="outline"
-                                                    className="w-full text-primary border-primary hover:bg-accent hover:text-primary transition-all duration-300 font-semibold rounded-xl"
+                                                    className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl group-hover:shadow-md"
                                                 >
                                                     Saiba Mais
                                                 </Button>
@@ -151,9 +152,7 @@ export default function Services() {
 
                                             <Button
                                                 variant="default"
-                                                // DE: bg-[#d4af37] border-[#d4af37] text-black hover:bg-[#c9a234] hover:border-[#c9a234]
-                                                // PARA: (Remove cores, usa o padrão do Button)
-                                                className="w-full transition-all duration-300 font-semibold rounded-xl"
+                                                className="w-full transition-all duration-300 font-semibold rounded-xl hover:scale-[1.02] shadow-md hover:shadow-lg hover:shadow-primary/30"
                                                 onClick={handleSchedule}
                                             >
                                                 Agendar Consulta
@@ -161,42 +160,58 @@ export default function Services() {
                                         </div>
                                     </div>
 
-                                    {/* DE: bg-[#0d0d0d] border border-[#2a2a2a] text-white */}
-                                    {/* PARA: (O DialogContent já usa cores de Popover/Card do CSS global) */}
-                                    <DialogContent className="max-w-2xl">
-                                        <DialogHeader className="mb-6">
-                                            <div className="flex items-center gap-6">
-                                                {/* DE: bg-[#d4af37]/15 border-[#d4af37]/40 ... text-[#d4af37] */}
-                                                {/* PARA: bg-primary/15 border-primary/40 ... text-primary */}
-                                                <div className="w-20 h-20 bg-primary/15 border border-primary/40 rounded-2xl flex items-center justify-center shrink-0">
-                                                    <Icon className="text-primary" size={48} />
+                                    <DialogContent className="max-w-2xl border-2">
+                                        <DialogHeader className="mb-8">
+                                            <div className="flex items-start gap-6">
+                                                <div className={`w-20 h-20 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
+                                                    <Icon className={service.iconColor} size={40} strokeWidth={2.5} />
                                                 </div>
-                                                <DialogTitle className="text-3xl font-bold tracking-tight text-left">
-                                                    {service.title}
-                                                </DialogTitle>
+                                                <div className="flex-1">
+                                                    <DialogTitle className="text-3xl font-bold tracking-tight text-left mb-2">
+                                                        {service.title}
+                                                    </DialogTitle>
+                                                    <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/30 rounded-full" />
+                                                </div>
                                             </div>
                                         </DialogHeader>
 
-                                        {/* DE: text-white/80 */}
-                                        {/* PARA: text-muted-foreground */}
-                                        <DialogDescription className="text-muted-foreground text-base leading-relaxed mb-8 text-left">
-                                            {service.details}
-                                        </DialogDescription>
+                                        <div className="space-y-6">
+                                            <DialogDescription className="text-muted-foreground text-lg leading-relaxed text-left">
+                                                {service.details}
+                                            </DialogDescription>
 
-                                        <div className="flex flex-col gap-3">
-                                            {/* DE: bg-[#d4af37] hover:bg-[#c9a234] text-black ... shadow-[#d4af37]/20 */}
-                                            {/* PARA: (Remove cores) ... shadow-primary/20 */}
+                                            <div className={`p-6 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20`}>
+                                                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                                    Por que escolher este serviço?
+                                                </h4>
+                                                <ul className="space-y-2 text-sm text-muted-foreground">
+                                                    <li className="flex items-start gap-2">
+                                                        <span className="text-primary mt-0.5">✓</span>
+                                                        <span>Atendimento personalizado e estratégico</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-2">
+                                                        <span className="text-primary mt-0.5">✓</span>
+                                                        <span>Experiência comprovada em casos complexos</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-2">
+                                                        <span className="text-primary mt-0.5">✓</span>
+                                                        <span>Comunicação clara e transparente</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-3 mt-8 pt-6 border-t">
                                             <Button
                                                 size="lg"
-                                                className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/20"
+                                                className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30 text-base"
                                                 onClick={handleSchedule}
                                             >
-                                                Agendar Consulta
+                                                Agendar Consulta Gratuita
                                             </Button>
                                             <DialogClose asChild>
-                                                {/* DE: text-white/70 border-white/30 hover:bg-white/10 hover:text-white */}
-                                                {/* PARA: (Remove cores, usa variant="outline") */}
-                                                <Button variant="outline" className="w-full rounded-xl">
+                                                <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
                                                     Fechar
                                                 </Button>
                                             </DialogClose>
@@ -227,30 +242,27 @@ export default function Services() {
                                                     open={openService === service.title}
                                                     onOpenChange={(open) => setOpenService(open ? service.title : null)}
                                                 >
-                                                    {/* DE: bg-gradient-to-b from-[#1a1a1a] via-[#121212] to-[#0a0a0a] ... border border-[#2a2a2a] */}
-                                                    {/* PARA: bg-background border border-border */}
-                                                    <div className="w-full bg-background rounded-xl shadow-lg border border-border p-6 flex flex-col justify-between min-h-[480px]">
-                                                        <div className="flex flex-col items-start text-left gap-5">
-                                                            {/* DE: bg-[#d4af37]/15 border border-[#d4af37]/40 ... text-[#d4af37] */}
-                                                            {/* PARA: bg-primary/15 border-primary/40 ... text-primary */}
-                                                            <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-primary/15 border border-primary/40">
-                                                                <Icon className="text-primary" size={36} />
+                                                    <div className="relative w-full bg-background rounded-2xl shadow-lg border border-border p-6 flex flex-col justify-between min-h-[500px] overflow-hidden">
+                                                        {/* Gradient Background - Always visible on mobile */}
+                                                        <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50`} />
+
+                                                        <div className="relative z-10 flex flex-col items-start text-left gap-5">
+                                                            <div className={`w-16 h-16 flex items-center justify-center rounded-xl ${service.iconBg} border border-current shadow-lg`}>
+                                                                <Icon className={service.iconColor} size={32} strokeWidth={2} />
                                                             </div>
-                                                            {/* DE: text-white */}
-                                                            {/* PARA: text-foreground */}
-                                                            <h3 className="text-2xl font-semibold text-foreground">{service.title}</h3>
-                                                            {/* DE: text-white/70 */}
-                                                            {/* PARA: text-muted-foreground */}
-                                                            <p className="text-muted-foreground text-base leading-relaxed">{service.description}</p>
+                                                            <h3 className="text-2xl font-bold text-foreground">
+                                                                {service.title}
+                                                            </h3>
+                                                            <p className="text-muted-foreground text-base leading-relaxed">
+                                                                {service.description}
+                                                            </p>
                                                         </div>
 
-                                                        <div className="mt-8 flex flex-col gap-4">
+                                                        <div className="relative z-10 mt-8 flex flex-col gap-3">
                                                             <DialogTrigger asChild>
-                                                                {/* DE: text-[#d4af37] border-[#d4af37] hover:bg-[#d4af37]/20 hover:text-white */}
-                                                                {/* PARA: text-primary border-primary hover:bg-accent hover:text-primary */}
                                                                 <Button
                                                                     variant="outline"
-                                                                    className="w-full text-primary border-primary hover:bg-accent hover:text-primary transition-all duration-300 font-semibold rounded-xl"
+                                                                    className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl"
                                                                 >
                                                                     Saiba Mais
                                                                 </Button>
@@ -258,9 +270,7 @@ export default function Services() {
 
                                                             <Button
                                                                 variant="default"
-                                                                // DE: bg-[#d4af37] border-[#d4af37] text-black hover:bg-[#c9a234] hover:border-[#c9a234]
-                                                                // PARA: (Remove cores, usa o padrão)
-                                                                className="w-full transition-all duration-300 font-semibold rounded-xl"
+                                                                className="w-full transition-all duration-300 font-semibold rounded-xl shadow-md"
                                                                 onClick={handleSchedule}
                                                             >
                                                                 Agendar Consulta
@@ -268,42 +278,58 @@ export default function Services() {
                                                         </div>
                                                     </div>
 
-                                                    {/* DE: bg-[#0d0d0d] border border-[#2a2a2a] text-white */}
-                                                    {/* PARA: (Remove cores, usa o padrão do DialogContent) */}
-                                                    <DialogContent className="max-w-[90vw] max-h-[85vh] overflow-y-auto">
+                                                    <DialogContent className="max-w-[90vw] max-h-[85vh] overflow-y-auto border-2">
                                                         <DialogHeader className="mb-6">
-                                                            <div className="flex items-center gap-4">
-                                                                {/* DE: bg-[#d4af37]/15 border-[#d4af37]/40 ... text-[#d4af37] */}
-                                                                {/* PARA: bg-primary/15 border-primary/40 ... text-primary */}
-                                                                <div className="w-16 h-16 bg-primary/15 border border-primary/40 rounded-2xl flex items-center justify-center shrink-0">
-                                                                    <Icon className="text-primary" size={40} />
+                                                            <div className="flex items-start gap-4">
+                                                                <div className={`w-16 h-16 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
+                                                                    <Icon className={service.iconColor} size={36} strokeWidth={2.5} />
                                                                 </div>
-                                                                <DialogTitle className="text-2xl font-bold tracking-tight text-left">
-                                                                    {service.title}
-                                                                </DialogTitle>
+                                                                <div className="flex-1">
+                                                                    <DialogTitle className="text-2xl font-bold tracking-tight text-left mb-2">
+                                                                        {service.title}
+                                                                    </DialogTitle>
+                                                                    <div className="h-1 w-16 bg-gradient-to-r from-primary to-primary/30 rounded-full" />
+                                                                </div>
                                                             </div>
                                                         </DialogHeader>
 
-                                                        {/* DE: text-white/80 */}
-                                                        {/* PARA: text-muted-foreground */}
-                                                        <DialogDescription className="text-muted-foreground text-base leading-relaxed mb-6 text-left">
-                                                            {service.details}
-                                                        </DialogDescription>
+                                                        <div className="space-y-6">
+                                                            <DialogDescription className="text-muted-foreground text-base leading-relaxed text-left">
+                                                                {service.details}
+                                                            </DialogDescription>
 
-                                                        <div className="flex flex-col gap-3">
-                                                            {/* DE: bg-[#d4af37] hover:bg-[#c9a234] text-black ... shadow-[#d4af37]/20 */}
-                                                            {/* PARA: (Remove cores) ... shadow-primary/20 */}
+                                                            <div className={`p-5 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20`}>
+                                                                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2 text-sm">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                                                    Por que escolher este serviço?
+                                                                </h4>
+                                                                <ul className="space-y-2 text-sm text-muted-foreground">
+                                                                    <li className="flex items-start gap-2">
+                                                                        <span className="text-primary mt-0.5">✓</span>
+                                                                        <span>Atendimento personalizado e estratégico</span>
+                                                                    </li>
+                                                                    <li className="flex items-start gap-2">
+                                                                        <span className="text-primary mt-0.5">✓</span>
+                                                                        <span>Experiência comprovada em casos complexos</span>
+                                                                    </li>
+                                                                    <li className="flex items-start gap-2">
+                                                                        <span className="text-primary mt-0.5">✓</span>
+                                                                        <span>Comunicação clara e transparente</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex flex-col gap-3 mt-6 pt-6 border-t">
                                                             <Button
                                                                 size="lg"
-                                                                className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/20"
+                                                                className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30"
                                                                 onClick={handleSchedule}
                                                             >
-                                                                Agendar Consulta
+                                                                Agendar Consulta Gratuita
                                                             </Button>
                                                             <DialogClose asChild>
-                                                                {/* DE: text-white/70 border-white/30 hover:bg-white/10 hover:text-white */}
-                                                                {/* PARA: (Remove cores, usa variant="outline") */}
-                                                                <Button variant="outline" className="w-full rounded-xl">
+                                                                <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
                                                                     Fechar
                                                                 </Button>
                                                             </DialogClose>
@@ -317,7 +343,6 @@ export default function Services() {
                             </div>
                         </div>
 
-                        {/* Indicators */}
                         <div className="flex justify-center items-center gap-2 mt-8">
                             {services.map((_, index) => (
                                 <button
@@ -326,8 +351,6 @@ export default function Services() {
                                     className="group"
                                     aria-label={`Ir para slide ${index + 1}`}
                                 >
-                                    {/* DE: bg-[#d4af37] ... bg-white/30 group-hover:bg-white/50 */}
-                                    {/* PARA: bg-primary ... bg-foreground/30 group-hover:bg-foreground/50 */}
                                     <div className={`h-1.5 rounded-full transition-all duration-300 ${
                                         currentSlide === index
                                             ? 'w-12 bg-primary'
