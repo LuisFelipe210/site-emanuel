@@ -62,13 +62,21 @@ const services = [
 ]
 
 export default function Services() {
-    const [openService, setOpenService] = useState<string | null>(null)
+    const [openServiceDesktop, setOpenServiceDesktop] = useState<string | null>(null)
+    const [openServiceMobile, setOpenServiceMobile] = useState<string | null>(null)
     const [currentSlide, setCurrentSlide] = useState(0)
     const [touchStart, setTouchStart] = useState(0)
     const [touchEnd, setTouchEnd] = useState(0)
 
-    const handleSchedule = () => {
-        setOpenService(null)
+    const handleScheduleDesktop = () => {
+        setOpenServiceDesktop(null)
+        setTimeout(() => {
+            document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' })
+        }, 200)
+    }
+
+    const handleScheduleMobile = () => {
+        setOpenServiceMobile(null)
         setTimeout(() => {
             document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' })
         }, 200)
@@ -120,9 +128,9 @@ export default function Services() {
                             const Icon = service.icon
                             return (
                                 <Dialog
-                                    key={service.title}
-                                    open={openService === service.title}
-                                    onOpenChange={(open) => setOpenService(open ? service.title : null)}
+                                    key={`desktop-${service.title}`}
+                                    open={openServiceDesktop === service.title}
+                                    onOpenChange={(open) => setOpenServiceDesktop(open ? service.title : null)}
                                 >
                                     <div className="group relative w-full h-full bg-background rounded-2xl shadow-lg border border-border p-7 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 overflow-hidden min-h-[420px]">
                                         {/* Gradient Background Overlay */}
@@ -153,7 +161,7 @@ export default function Services() {
                                             <Button
                                                 variant="default"
                                                 className="w-full transition-all duration-300 font-semibold rounded-xl hover:scale-[1.02] shadow-md hover:shadow-lg hover:shadow-primary/30"
-                                                onClick={handleSchedule}
+                                                onClick={handleScheduleDesktop}
                                             >
                                                 Agendar Consulta
                                             </Button>
@@ -206,7 +214,7 @@ export default function Services() {
                                             <Button
                                                 size="lg"
                                                 className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30 text-base"
-                                                onClick={handleSchedule}
+                                                onClick={handleScheduleDesktop}
                                             >
                                                 Agendar Consulta Gratuita
                                             </Button>
@@ -232,111 +240,110 @@ export default function Services() {
                                 {services.map((service) => {
                                     const Icon = service.icon
                                     return (
-                                        <div key={service.title} className="w-full flex-shrink-0 px-4">
-                                            <div
-                                                onTouchStart={handleTouchStart}
-                                                onTouchMove={handleTouchMove}
-                                                onTouchEnd={handleTouchEnd}
+                                        <div key={`mobile-${service.title}`} className="w-full flex-shrink-0 px-4">
+                                            <Dialog
+                                                open={openServiceMobile === service.title}
+                                                onOpenChange={(open) => setOpenServiceMobile(open ? service.title : null)}
                                             >
-                                                <Dialog
-                                                    open={openService === service.title}
-                                                    onOpenChange={(open) => setOpenService(open ? service.title : null)}
+                                                <div
+                                                    onTouchStart={handleTouchStart}
+                                                    onTouchMove={handleTouchMove}
+                                                    onTouchEnd={handleTouchEnd}
+                                                    className="relative w-full bg-background rounded-2xl shadow-lg border border-border p-6 flex flex-col justify-between min-h-[500px] overflow-hidden"
                                                 >
-                                                    <div className="relative w-full bg-background rounded-2xl shadow-lg border border-border p-6 flex flex-col justify-between min-h-[500px] overflow-hidden">
-                                                        {/* Gradient Background - Always visible on mobile */}
-                                                        <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50`} />
+                                                    {/* Gradient Background - Always visible on mobile */}
+                                                    <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50`} />
 
-                                                        <div className="relative z-10 flex flex-col items-start text-left gap-5">
-                                                            <div className={`w-16 h-16 flex items-center justify-center rounded-xl ${service.iconBg} border border-current shadow-lg`}>
-                                                                <Icon className={service.iconColor} size={32} strokeWidth={2} />
-                                                            </div>
-                                                            <h3 className="text-2xl font-bold text-foreground">
-                                                                {service.title}
-                                                            </h3>
-                                                            <p className="text-muted-foreground text-base leading-relaxed">
-                                                                {service.description}
-                                                            </p>
+                                                    <div className="relative z-10 flex flex-col items-start text-left gap-5">
+                                                        <div className={`w-16 h-16 flex items-center justify-center rounded-xl ${service.iconBg} border border-current shadow-lg`}>
+                                                            <Icon className={service.iconColor} size={32} strokeWidth={2} />
                                                         </div>
+                                                        <h3 className="text-2xl font-bold text-foreground">
+                                                            {service.title}
+                                                        </h3>
+                                                        <p className="text-muted-foreground text-base leading-relaxed">
+                                                            {service.description}
+                                                        </p>
+                                                    </div>
 
-                                                        <div className="relative z-10 mt-8 flex flex-col gap-3">
-                                                            <DialogTrigger asChild>
-                                                                <Button
-                                                                    variant="outline"
-                                                                    className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl"
-                                                                >
-                                                                    Saiba Mais
-                                                                </Button>
-                                                            </DialogTrigger>
-
+                                                    <div className="relative z-10 mt-8 flex flex-col gap-3">
+                                                        <DialogTrigger asChild>
                                                             <Button
-                                                                variant="default"
-                                                                className="w-full transition-all duration-300 font-semibold rounded-xl shadow-md"
-                                                                onClick={handleSchedule}
+                                                                variant="outline"
+                                                                className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl"
                                                             >
-                                                                Agendar Consulta
+                                                                Saiba Mais
                                                             </Button>
+                                                        </DialogTrigger>
+
+                                                        <Button
+                                                            variant="default"
+                                                            className="w-full transition-all duration-300 font-semibold rounded-xl shadow-md"
+                                                            onClick={handleScheduleMobile}
+                                                        >
+                                                            Agendar Consulta
+                                                        </Button>
+                                                    </div>
+                                                </div>
+
+                                                <DialogContent className="max-w-[90vw] max-h-[85vh] overflow-y-auto border-2">
+                                                    <DialogHeader className="mb-6">
+                                                        <div className="flex items-start gap-4">
+                                                            <div className={`w-16 h-16 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
+                                                                <Icon className={service.iconColor} size={36} strokeWidth={2.5} />
+                                                            </div>
+                                                            <div className="flex-1">
+                                                                <DialogTitle className="text-2xl font-bold tracking-tight text-left mb-2">
+                                                                    {service.title}
+                                                                </DialogTitle>
+                                                                <div className="h-1 w-16 bg-gradient-to-r from-primary to-primary/30 rounded-full" />
+                                                            </div>
+                                                        </div>
+                                                    </DialogHeader>
+
+                                                    <div className="space-y-6">
+                                                        <DialogDescription className="text-muted-foreground text-base leading-relaxed text-left">
+                                                            {service.details}
+                                                        </DialogDescription>
+
+                                                        <div className={`p-5 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20`}>
+                                                            <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2 text-sm">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                                                Por que escolher este serviço?
+                                                            </h4>
+                                                            <ul className="space-y-2 text-sm text-muted-foreground">
+                                                                <li className="flex items-start gap-2">
+                                                                    <span className="text-primary mt-0.5">✓</span>
+                                                                    <span>Atendimento personalizado e estratégico</span>
+                                                                </li>
+                                                                <li className="flex items-start gap-2">
+                                                                    <span className="text-primary mt-0.5">✓</span>
+                                                                    <span>Experiência comprovada em casos complexos</span>
+                                                                </li>
+                                                                <li className="flex items-start gap-2">
+                                                                    <span className="text-primary mt-0.5">✓</span>
+                                                                    <span>Comunicação clara e transparente</span>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
 
-                                                    <DialogContent className="max-w-[90vw] max-h-[85vh] overflow-y-auto border-2">
-                                                        <DialogHeader className="mb-6">
-                                                            <div className="flex items-start gap-4">
-                                                                <div className={`w-16 h-16 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
-                                                                    <Icon className={service.iconColor} size={36} strokeWidth={2.5} />
-                                                                </div>
-                                                                <div className="flex-1">
-                                                                    <DialogTitle className="text-2xl font-bold tracking-tight text-left mb-2">
-                                                                        {service.title}
-                                                                    </DialogTitle>
-                                                                    <div className="h-1 w-16 bg-gradient-to-r from-primary to-primary/30 rounded-full" />
-                                                                </div>
-                                                            </div>
-                                                        </DialogHeader>
-
-                                                        <div className="space-y-6">
-                                                            <DialogDescription className="text-muted-foreground text-base leading-relaxed text-left">
-                                                                {service.details}
-                                                            </DialogDescription>
-
-                                                            <div className={`p-5 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20`}>
-                                                                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2 text-sm">
-                                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                                                    Por que escolher este serviço?
-                                                                </h4>
-                                                                <ul className="space-y-2 text-sm text-muted-foreground">
-                                                                    <li className="flex items-start gap-2">
-                                                                        <span className="text-primary mt-0.5">✓</span>
-                                                                        <span>Atendimento personalizado e estratégico</span>
-                                                                    </li>
-                                                                    <li className="flex items-start gap-2">
-                                                                        <span className="text-primary mt-0.5">✓</span>
-                                                                        <span>Experiência comprovada em casos complexos</span>
-                                                                    </li>
-                                                                    <li className="flex items-start gap-2">
-                                                                        <span className="text-primary mt-0.5">✓</span>
-                                                                        <span>Comunicação clara e transparente</span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="flex flex-col gap-3 mt-6 pt-6 border-t">
-                                                            <Button
-                                                                size="lg"
-                                                                className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30"
-                                                                onClick={handleSchedule}
-                                                            >
-                                                                Agendar Consulta Gratuita
+                                                    <div className="flex flex-col gap-3 mt-6 pt-6 border-t">
+                                                        <Button
+                                                            size="lg"
+                                                            className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30"
+                                                            onClick={handleScheduleMobile}
+                                                        >
+                                                            Agendar Consulta Gratuita
+                                                        </Button>
+                                                        <DialogClose asChild>
+                                                            <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
+                                                                Fechar
                                                             </Button>
-                                                            <DialogClose asChild>
-                                                                <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
-                                                                    Fechar
-                                                                </Button>
-                                                            </DialogClose>
-                                                        </div>
-                                                    </DialogContent>
-                                                </Dialog>
-                                            </div>
+                                                        </DialogClose>
+                                                    </div>
+                                                </DialogContent>
+                                            </Dialog>
                                         </div>
                                     )
                                 })}
