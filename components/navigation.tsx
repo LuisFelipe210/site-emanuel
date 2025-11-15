@@ -3,20 +3,16 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, Sun, Moon } from "lucide-react" // Importar Sun e Moon
+import { Menu, X, Sun, Moon } from "lucide-react"
 import { Button } from "./ui/button"
-import { useTheme } from "next-themes" // Importar o hook de tema
+import { useTheme } from "next-themes"
 
-// Componente para o botão de troca de tema
 function ThemeToggleButton() {
     const { setTheme, theme } = useTheme()
-
-    // Evita piscar o botão errado no carregamento
     const [mounted, setMounted] = useState(false)
     useEffect(() => setMounted(true), [])
 
     if (!mounted) {
-        // Retorna um placeholder ou nada para evitar "hydration mismatch"
         return <div className="size-9" />
     }
 
@@ -24,7 +20,7 @@ function ThemeToggleButton() {
         <Button
             variant="ghost"
             size="icon"
-            className="text-foreground hover:text-primary" // Ajustado para as variáveis
+            className="text-foreground hover:text-primary hover:bg-white/10 dark:hover:bg-white/5 rounded-full transition-all duration-300 backdrop-blur-sm"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         >
             <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -62,67 +58,75 @@ export default function Navigation() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
                     scrolled
-                        // DE: bg-black/90 ... border-[#2a2a2a]
-                        // PARA: bg-background/90 ... border-border
-                        ? "bg-background/90 backdrop-blur-lg border-b border-border shadow-md"
-                        // DE: bg-black/70
-                        // PARA: bg-background/70
-                        : "bg-background/70 backdrop-blur-sm"
+                        ? "bg-white/70 dark:bg-black/70 backdrop-blur-2xl border-b border-white/20 dark:border-white/10 shadow-lg shadow-black/5 dark:shadow-black/20"
+                        : "bg-white/50 dark:bg-black/50 backdrop-blur-xl border-b border-white/10 dark:border-white/5"
                 }`}
             >
+                {/* Efeito de brilho no topo */}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 dark:via-white/20 to-transparent" />
+
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
-                        <Link href="/" className="flex items-center gap-2">
-                            <Image
-                                src="/lg.svg"
-                                alt="Logo Emanuel Silvestre"
-                                width={56}
-                                height={56}
-                                className="object-contain"
-                            />
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <div className="relative">
+                                <Image
+                                    src="/lg.svg"
+                                    alt="Logo Emanuel Silvestre"
+                                    width={56}
+                                    height={56}
+                                    className="object-contain transition-transform duration-300 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-primary/30 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                            </div>
                             <div className="hidden md:flex flex-col leading-tight">
-                                {/* DE: text-[#d4af37] */}
-                                {/* PARA: text-primary */}
-                                <span className="text-xl font-semibold text-primary tracking-tight">
+                                <span className="text-xl font-semibold text-primary tracking-tight transition-colors duration-300">
                                     Emanuel Silvestre
                                 </span>
-                                {/* DE: text-white/70 */}
-                                {/* PARA: text-muted-foreground */}
                                 <span className="text-sm font-medium text-muted-foreground">
                                     Advocacia
                                 </span>
                             </div>
                         </Link>
 
-                        <div className="hidden md:flex gap-8 items-center">
+                        {/* Desktop Menu */}
+                        <div className="hidden md:flex gap-1 items-center">
                             {links.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    // DE: text-white ... hover:text-[#d4af37] ... bg-[#d4af37]
-                                    // PARA: text-foreground ... hover:text-primary ... bg-primary
-                                    className="relative text-foreground font-medium transition-all duration-200 hover:text-primary group"
+                                    className="relative px-4 py-2 text-foreground font-medium transition-all duration-300 hover:text-primary group rounded-xl hover:bg-white/40 dark:hover:bg-white/10 backdrop-blur-sm"
                                 >
                                     {link.label}
-                                    <span className="absolute left-0 bottom-[-3px] w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
+                                    <span className="absolute left-1/2 -translate-x-1/2 bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0 transition-all duration-300 group-hover:w-10 rounded-full" />
                                 </Link>
                             ))}
-                            {/* ADICIONA O BOTÃO DE TEMA AQUI */}
-                            <ThemeToggleButton />
+
+                            <div className="ml-2 pl-2 border-l border-white/20 dark:border-white/10">
+                                <ThemeToggleButton />
+                            </div>
+
+                            <Button
+                                asChild
+                                size="sm"
+                                className="ml-2 font-semibold px-5 rounded-full shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30 bg-gradient-to-r from-primary to-primary/90"
+                            >
+                                <Link href="#contato">
+                                    Agendar Consulta
+                                </Link>
+                            </Button>
                         </div>
 
+                        {/* Mobile Menu Button */}
                         <div className="md:hidden flex items-center gap-2">
-                            {/* ADICIONA O BOTÃO DE TEMA AQUI TBM */}
                             <ThemeToggleButton />
                             <Button
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                // DE: text-white
-                                // PARA: text-foreground
-                                className="relative z-[60] text-foreground"
+                                className="relative z-[60] text-foreground hover:bg-white/40 dark:hover:bg-white/10 rounded-full transition-all duration-300 backdrop-blur-sm"
                             >
                                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                                 <span className="sr-only">Abrir menu</span>
@@ -130,35 +134,43 @@ export default function Navigation() {
                         </div>
                     </div>
                 </div>
+
+                {/* Efeito de brilho na base */}
+                <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-black/5 dark:via-white/5 to-transparent" />
             </nav>
 
+            {/* Mobile Menu Overlay */}
             <div
-                // DE: bg-black/95
-                // PARA: bg-background/95
-                className={`fixed inset-0 z-40 bg-background/95 backdrop-blur-xl transition-all duration-300 ${
+                className={`fixed inset-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-3xl transition-all duration-500 ${
                     isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
             >
-                <div className="flex flex-col items-center justify-center h-full space-y-8">
-                    {links.map((link) => (
+                {/* Efeito de grid sutil no fundo */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+                {/* Gradiente radial para efeito de profundidade */}
+                <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
+
+                <div className="relative flex flex-col items-center justify-center h-full space-y-6 px-6">
+                    {links.map((link, index) => (
                         <Link
                             key={link.href}
                             href={link.href}
                             onClick={() => setIsMenuOpen(false)}
-                            // DE: text-white hover:text-[#d4af37]
-                            // PARA: text-foreground hover:text-primary
-                            className="text-2xl font-semibold text-foreground hover:text-primary transition-all duration-200"
+                            className="relative text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 hover:scale-110 animate-in fade-in-0 slide-in-from-bottom-4 px-8 py-3 rounded-2xl hover:bg-white/40 dark:hover:bg-white/10 backdrop-blur-sm"
+                            style={{ animationDelay: `${index * 100}ms` }}
                         >
                             {link.label}
+                            {/* Brilho decorativo */}
+                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
                         </Link>
                     ))}
 
                     <Button
                         asChild
                         size="lg"
-                        // DE: bg-[#d4af37] hover:bg-[#c9a234] text-black
-                        // PARA: (Remove as cores, o padrão do Button já é a cor primária)
-                        className="mt-6 font-semibold px-8 py-4 shadow-md transition-all duration-300 hover:scale-105"
+                        className="mt-8 font-semibold px-10 py-6 text-lg rounded-full shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_rgba(var(--primary),0.5)] animate-in fade-in-0 slide-in-from-bottom-4 bg-gradient-to-r from-primary to-primary/90 backdrop-blur-sm border border-white/20"
+                        style={{ animationDelay: "500ms" }}
                     >
                         <Link href="#contato" onClick={() => setIsMenuOpen(false)}>
                             Agendar Consulta
