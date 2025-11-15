@@ -20,7 +20,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-transparent dark:from-black/30 dark:via-black/20 dark:to-black/10" />
             </div>
 
-            <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-between px-6 py-20 sm:py-24 md:py-32 lg:flex-row lg:gap-20">
+            <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-between px-6 py-24 sm:py-20 md:py-28 lg:flex-row lg:gap-20">
                 <div className="text-center lg:text-left max-w-2xl space-y-6">
                     <div className="inline-flex items-center gap-3 rounded-full bg-primary/10 border border-primary/30 px-4 py-1 text-sm font-medium text-primary backdrop-blur-sm">
                         <Scale className="h-5 w-5" />
