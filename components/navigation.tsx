@@ -141,35 +141,27 @@ export default function Navigation() {
 
             {/* Mobile Menu Overlay */}
             <div
-                className={`fixed inset-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-3xl transition-all duration-500 ${
+                className={`fixed inset-0 z-40 bg-background/98 backdrop-blur-2xl transition-all duration-500 ${
                     isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
             >
-                {/* Efeito de grid sutil no fundo */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-
-                {/* Gradiente radial para efeito de profundidade */}
-                <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
-
-                <div className="relative flex flex-col items-center justify-center h-full space-y-6 px-6">
+                <div className="flex flex-col items-center justify-center h-full space-y-6 px-6">
                     {links.map((link, index) => (
                         <Link
                             key={link.href}
                             href={link.href}
                             onClick={() => setIsMenuOpen(false)}
-                            className="relative text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 hover:scale-110 animate-in fade-in-0 slide-in-from-bottom-4 px-8 py-3 rounded-2xl hover:bg-white/40 dark:hover:bg-white/10 backdrop-blur-sm"
+                            className="text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 hover:scale-110 animate-in fade-in-0 slide-in-from-bottom-4"
                             style={{ animationDelay: `${index * 100}ms` }}
                         >
                             {link.label}
-                            {/* Brilho decorativo */}
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
                         </Link>
                     ))}
 
                     <Button
                         asChild
                         size="lg"
-                        className="mt-8 font-semibold px-10 py-6 text-lg rounded-full shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_rgba(var(--primary),0.5)] animate-in fade-in-0 slide-in-from-bottom-4 bg-gradient-to-r from-primary to-primary/90 backdrop-blur-sm border border-white/20"
+                        className="mt-8 font-semibold px-10 py-6 text-lg rounded-full shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/40 animate-in fade-in-0 slide-in-from-bottom-4"
                         style={{ animationDelay: "500ms" }}
                     >
                         <Link href="#contato" onClick={() => setIsMenuOpen(false)}>
