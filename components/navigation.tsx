@@ -13,14 +13,16 @@ function ThemeToggleButton() {
     useEffect(() => setMounted(true), [])
 
     if (!mounted) {
-        return <div className="size-9" />
+        // Retorna um placeholder com o mesmo tamanho pra evitar "pulo" no layout
+        return <div className="size-9 w-9" />
     }
 
     return (
         <Button
             variant="ghost"
             size="icon"
-            className="text-foreground hover:text-primary hover:bg-white/10 dark:hover:bg-white/5 rounded-full transition-all duration-300 backdrop-blur-sm"
+            // === MUDANÇA 1: Hover usa 'accent' do tema ===
+            className="text-foreground hover:text-primary hover:bg-accent rounded-full transition-all duration-300"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         >
             <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -58,14 +60,15 @@ export default function Navigation() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+                // === MUDANÇA 2: Lógica de scroll simplificada e usando tokens do tema ===
+                className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
                     scrolled
-                        ? "bg-white/70 dark:bg-black/70 backdrop-blur-2xl border-b border-white/20 dark:border-white/10 shadow-lg shadow-black/5 dark:shadow-black/20"
-                        : "bg-white/50 dark:bg-black/50 backdrop-blur-xl border-b border-white/10 dark:border-white/5"
+                        ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-md"
+                        : "border-b border-transparent"
                 }`}
             >
-                {/* Efeito de brilho no topo */}
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 dark:via-white/20 to-transparent" />
+                {/* Efeito de brilho no topo (ajustado) */}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
@@ -97,14 +100,15 @@ export default function Navigation() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="relative px-4 py-2 text-foreground font-medium transition-all duration-300 hover:text-primary group rounded-xl hover:bg-white/40 dark:hover:bg-white/10 backdrop-blur-sm"
+                                    // === MUDANÇA 3: Hover usa 'accent' ===
+                                    className="relative px-4 py-2 text-foreground font-medium transition-all duration-300 hover:text-primary group rounded-xl hover:bg-accent"
                                 >
                                     {link.label}
                                     <span className="absolute left-1/2 -translate-x-1/2 bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0 transition-all duration-300 group-hover:w-10 rounded-full" />
                                 </Link>
                             ))}
 
-                            <div className="ml-2 pl-2 border-l border-white/20 dark:border-white/10">
+                            <div className="ml-2 pl-2 border-l border-border/50">
                                 <ThemeToggleButton />
                             </div>
 
@@ -126,7 +130,8 @@ export default function Navigation() {
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="relative z-[60] text-foreground hover:bg-white/40 dark:hover:bg-white/10 rounded-full transition-all duration-300 backdrop-blur-sm"
+                                // === MUDANÇA 4: Hover usa 'accent' ===
+                                className="relative z-[60] text-foreground hover:bg-accent rounded-full transition-all duration-300"
                             >
                                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                                 <span className="sr-only">Abrir menu</span>
@@ -135,13 +140,14 @@ export default function Navigation() {
                     </div>
                 </div>
 
-                {/* Efeito de brilho na base */}
-                <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-black/5 dark:via-white/5 to-transparent" />
+                {/* Efeito de brilho na base (ajustado) */}
+                <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
             </nav>
 
             {/* Mobile Menu Overlay */}
             <div
-                className={`fixed inset-0 z-40 bg-background/98 backdrop-blur-2xl transition-all duration-500 ${
+                // === MUDANÇA 5: Fundo do menu mobile usa 'background' ===
+                className={`fixed inset-0 z-40 bg-background/95 backdrop-blur-2xl transition-all duration-500 ${
                     isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
             >

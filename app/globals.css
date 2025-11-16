@@ -4,34 +4,33 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    /* MODO CLARO (Branco, Cinza, Azul) - Base */
-    --background: oklch(1 0 0); /* Branco */
-    --foreground: oklch(0.1 0.02 250); /* Azul Bem Escuro (Texto) */
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.1 0.02 250);
 
-    --card: oklch(1 0 0); /* Branco */
+    --card: oklch(1 0 0);
     --card-foreground: oklch(0.1 0.02 250);
 
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.1 0.02 250);
 
-    --primary: oklch(0.5 0.15 250); /* Azul Primário */
-    --primary-foreground: oklch(1 0 0); /* Branco (Texto do botão azul) */
+    --primary: oklch(0.5 0.15 250);
+    --primary-foreground: oklch(1 0 0);
 
-    --secondary: oklch(0.95 0.01 250); /* Cinza-Azulado Claro */
-    --secondary-foreground: oklch(0.1 0.02 250); /* Azul Escuro */
+    --secondary: oklch(0.95 0.01 250);
+    --secondary-foreground: oklch(0.1 0.02 250);
 
-    --muted: oklch(0.97 0.01 250); /* Cinza-Azulado (Mais Claro) */
-    --muted-foreground: oklch(0.4 0.02 250); /* Cinza-Azulado Médio (Texto) */
+    --muted: oklch(0.97 0.01 250);
+    --muted-foreground: oklch(0.4 0.02 250);
 
-    --accent: oklch(0.95 0.01 250); /* Azul de Destaque (hover) */
-    --accent-foreground: oklch(0.1 0.02 250); /* Azul Escuro */
+    --accent: oklch(0.95 0.01 250);
+    --accent-foreground: oklch(0.1 0.02 250);
 
-    --destructive: oklch(0.6 0.2 25); /* Vermelho */
-    --destructive-foreground: oklch(1 0 0); /* Branco */
+    --destructive: oklch(0.6 0.2 25);
+    --destructive-foreground: oklch(1 0 0);
 
-    --border: oklch(0.9 0.01 250); /* Borda Cinza-Azulada */
-    --input: oklch(0.9 0.01 250); /* Input Cinza-Azulado */
-    --ring: oklch(0.5 0.15 250); /* Anel de Foco Azul */
+    --border: oklch(0.9 0.01 250);
+    --input: oklch(0.9 0.01 250);
+    --ring: oklch(0.5 0.15 250);
 
     --chart-1: oklch(0.5 0.15 250);
     --chart-2: oklch(0.6 0.1 260);
@@ -52,35 +51,34 @@
 }
 
 .dark {
-    /* MODO ESCURO (Seu tema Preto/Dourado) - Quando .dark está ativo */
-    --background: oklch(0.1 0 0); /* Preto (bg-[#0a0a0a]) */
-    --foreground: oklch(0.98 0 0); /* Branco (text-white) */
+    --background: oklch(0.1 0 0);
+    --foreground: oklch(0.98 0 0);
 
-    --card: oklch(0.12 0 0); /* Preto (bg-[#0d0d0d] ou bg-[#0a0a0a]) */
+    --card: oklch(0.12 0 0);
     --card-foreground: oklch(0.98 0 0);
 
     --popover: oklch(0.12 0 0);
     --popover-foreground: oklch(0.98 0 0);
 
-    /* Dourado vira a cor Primária no modo escuro */
-    --primary: oklch(0.75 0.15 90); /* Dourado (bg-[#d4af37]) */
-    --primary-foreground: oklch(0.1 0 0); /* Preto (text-black) */
 
-    --secondary: oklch(0.18 0 0); /* Cinza escuro */
+    --primary: oklch(0.75 0.15 90);
+    --primary-foreground: oklch(0.1 0 0);
+
+    --secondary: oklch(0.18 0 0);
     --secondary-foreground: oklch(0.98 0 0);
 
-    --muted: oklch(0.22 0 0); /* Cinza escuro (bg-[#111]/80) */
-    --muted-foreground: oklch(0.7 0 0); /* Cinza claro (text-white/70) */
+    --muted: oklch(0.22 0 0);
+    --muted-foreground: oklch(0.7 0 0);
 
-    --accent: oklch(0.75 0.15 90 / 0.15); /* Dourado (hover: bg-[#d4af37]/15) */
-    --accent-foreground: oklch(0.75 0.15 90); /* Dourado (texto de hover) */
+    --accent: oklch(0.75 0.15 90 / 0.15);
+    --accent-foreground: oklch(0.75 0.15 90);
 
     --destructive: oklch(0.4 0.1 30);
     --destructive-foreground: oklch(0.95 0 0);
 
-    --border: oklch(0.25 0 0); /* Borda escura (border-[#2a2a2a]) */
+    --border: oklch(0.25 0 0);
     --input: oklch(0.25 0 0);
-    --ring: oklch(0.75 0.15 90); /* Anel de Foco Dourado */
+    --ring: oklch(0.75 0.15 90);
 
     --chart-1: oklch(0.15 0 0);
     --chart-2: oklch(0.35 0 0);

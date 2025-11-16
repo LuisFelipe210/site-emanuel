@@ -8,8 +8,9 @@ export default function Footer() {
                            dark:bg-white dark:text-gray-900 dark:border-t dark:border-gray-200"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-8">
 
+                    {/* Coluna 1: Logo */}
                     <div>
                         <Link href="/" className="flex items-center gap-2">
                             <Image
@@ -30,6 +31,7 @@ export default function Footer() {
                         </Link>
                     </div>
 
+                    {/* Coluna 2: Links */}
                     <div>
                         <h4 className="font-semibold text-white dark:text-gray-900 mb-4">Links</h4>
                         <ul className="space-y-2 text-sm text-gray-400 dark:text-gray-600">
@@ -40,6 +42,7 @@ export default function Footer() {
                         </ul>
                     </div>
 
+                    {/* Coluna 3: Contato */}
                     <div>
                         <h4 className="font-semibold text-white dark:text-gray-900 mb-4">Contato</h4>
                         <div className="space-y-4">
@@ -51,7 +54,8 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-gray-400 dark:text-gray-600 text-sm">Telefone</p>
-                                    <a href="tel:+5587996128608" className="text-sm font-medium text-white dark:text-gray-900 hover:text-primary dark:hover:text-[#d4af37] transition">
+                                    {/* === MUDANÇA 1: Fonte diminuída === */}
+                                    <a href="tel:+5587996128608" className="text-xs font-medium text-white dark:text-gray-900 hover:text-primary dark:hover:text-[#d4af37] transition">
                                         (87) 99612-8608
                                     </a>
                                 </div>
@@ -65,7 +69,8 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-gray-400 dark:text-gray-600 text-sm">Email</p>
-                                    <a href="mailto:emanuelsilvestre.adv@gmail.com" className="text-sm font-medium text-white dark:text-gray-900 hover:text-primary dark:hover:text-[#d4af37] transition">
+                                    {/* === MUDANÇA 2: Fonte diminuída e ajuste de quebra de linha === */}
+                                    <a href="mailto:emanuelsilvestre.adv@gmail.com" className="text-xs font-medium text-white dark:text-gray-900 hover:text-primary dark:hover:text-[#d4af37] transition break-words">
                                         emanuelsilvestre.adv@gmail.com
                                     </a>
                                 </div>
@@ -85,6 +90,7 @@ export default function Footer() {
                         </div>
                     </div>
 
+                    {/* Coluna 4: Redes Sociais */}
                     <div>
                         <h4 className="font-semibold text-white dark:text-gray-900 mb-4">Redes Sociais</h4>
                         <div className="flex gap-4">
@@ -111,6 +117,7 @@ export default function Footer() {
 
                 </div>
 
+                {/* Bottom Bar */}
                 <div className="border-t border-[#2a2a2a] pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400
                                 dark:border-gray-200 dark:text-gray-600"
                 >

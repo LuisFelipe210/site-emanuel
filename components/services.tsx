@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Shield, Briefcase, Scale, FileText } from "lucide-react"
+import { Shield, Briefcase, Scale, FileText, ArrowRight, Sparkles } from "lucide-react"
 
 import {
     Dialog,
@@ -22,9 +22,10 @@ const services = [
             "Atuação completa em causas cíveis, indenizações, responsabilidade civil e contratos.",
         details:
             "Prestamos assessoria jurídica completa em todas as áreas do Direito Civil, com foco em soluções estratégicas e resultados práticos para nossos clientes.",
-        gradient: "from-blue-500/10 via-blue-500/5 to-transparent",
-        iconBg: "bg-gradient-to-br from-blue-500/20 to-blue-600/10",
-        iconColor: "text-blue-600 dark:text-blue-400"
+        gradient: "from-blue-500/10 via-blue-500/5 to-transparent dark:from-amber-500/10 dark:via-amber-500/5",
+        iconBg: "bg-gradient-to-br from-blue-500/20 to-blue-600/10 dark:from-amber-500/20 dark:to-amber-600/10",
+        iconColor: "text-blue-600 dark:text-amber-400",
+        borderGlow: "group-hover:shadow-blue-500/20 dark:group-hover:shadow-amber-500/20"
     },
     {
         icon: Briefcase,
@@ -33,9 +34,10 @@ const services = [
             "Consultoria para empresas, contratos, compliance e resolução de conflitos societários.",
         details:
             "Auxiliamos empresas de todos os portes na estruturação jurídica de suas operações, elaboração e revisão de contratos, governança corporativa e defesa em litígios empresariais.",
-        gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
-        iconBg: "bg-gradient-to-br from-purple-500/20 to-purple-600/10",
-        iconColor: "text-purple-600 dark:text-purple-400"
+        gradient: "from-blue-500/10 via-blue-500/5 to-transparent dark:from-amber-500/10 dark:via-amber-500/5",
+        iconBg: "bg-gradient-to-br from-blue-500/20 to-blue-600/10 dark:from-amber-500/20 dark:to-amber-600/10",
+        iconColor: "text-blue-600 dark:text-amber-400",
+        borderGlow: "group-hover:shadow-blue-500/20 dark:group-hover:shadow-amber-500/20"
     },
     {
         icon: Scale,
@@ -44,9 +46,10 @@ const services = [
             "Defesa e orientação em demandas trabalhistas de empregados e empregadores.",
         details:
             "Atendimento estratégico em ações trabalhistas, acordos extrajudiciais e consultoria preventiva para minimizar riscos e litígios futuros.",
-        gradient: "from-amber-500/10 via-amber-500/5 to-transparent",
-        iconBg: "bg-gradient-to-br from-amber-500/20 to-amber-600/10",
-        iconColor: "text-amber-600 dark:text-amber-400"
+        gradient: "from-blue-500/10 via-blue-500/5 to-transparent dark:from-amber-500/10 dark:via-amber-500/5",
+        iconBg: "bg-gradient-to-br from-blue-500/20 to-blue-600/10 dark:from-amber-500/20 dark:to-amber-600/10",
+        iconColor: "text-blue-600 dark:text-amber-400",
+        borderGlow: "group-hover:shadow-blue-500/20 dark:group-hover:shadow-amber-500/20"
     },
     {
         icon: FileText,
@@ -55,9 +58,10 @@ const services = [
             "Elaboração, revisão e negociação de contratos com segurança e clareza jurídica.",
         details:
             "Elaboramos e revisamos contratos com linguagem clara e foco em segurança jurídica, evitando cláusulas abusivas e protegendo seus interesses.",
-        gradient: "from-emerald-500/10 via-emerald-500/5 to-transparent",
-        iconBg: "bg-gradient-to-br from-emerald-500/20 to-emerald-600/10",
-        iconColor: "text-emerald-600 dark:text-emerald-400"
+        gradient: "from-blue-500/10 via-blue-500/5 to-transparent dark:from-amber-500/10 dark:via-amber-500/5",
+        iconBg: "bg-gradient-to-br from-blue-500/20 to-blue-600/10 dark:from-amber-500/20 dark:to-amber-600/10",
+        iconColor: "text-blue-600 dark:text-amber-400",
+        borderGlow: "group-hover:shadow-blue-500/20 dark:group-hover:shadow-amber-500/20"
     },
 ]
 
@@ -108,21 +112,24 @@ export default function Services() {
         <section id="servicos" className="relative py-16 md:py-20 bg-muted text-foreground overflow-hidden">
             <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-[0.01] dark:opacity-[0.03]" />
 
+            <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                 <div>
                     <div className="text-center mb-16">
-                        <span className="text-primary text-sm font-semibold uppercase tracking-wide">
+                        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold uppercase tracking-wide mb-4">
+                            <Sparkles className="size-4" />
                             Áreas de Atuação
-                        </span>
+                        </div>
                         <h2 className="text-3xl md:text-5xl font-bold mt-2 text-foreground">
                             Serviços Especializados em Direito
                         </h2>
-                        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+                        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
                             Soluções jurídicas estratégicas e personalizadas para cada necessidade, com ética, técnica e comprometimento.
                         </p>
                     </div>
 
-                    {/* Desktop Grid */}
                     <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-1">
                         {services.map((service) => {
                             const Icon = service.icon
@@ -132,9 +139,14 @@ export default function Services() {
                                     open={openServiceDesktop === service.title}
                                     onOpenChange={(open) => setOpenServiceDesktop(open ? service.title : null)}
                                 >
-                                    <div className="group relative w-full h-full bg-background rounded-2xl shadow-lg border border-border p-7 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 overflow-hidden min-h-[420px]">
-                                        {/* Gradient Background Overlay */}
+                                    <div className={`group relative w-full h-full bg-background rounded-2xl shadow-lg border border-border p-7 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${service.borderGlow} hover:border-primary/30 overflow-hidden min-h-[380px]`}>
                                         <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                                        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div className="bg-primary/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                                                <Sparkles className="size-3 text-primary" />
+                                            </div>
+                                        </div>
 
                                         <div className="relative z-10 flex flex-col items-start text-left gap-5">
                                             <div className={`w-16 h-16 flex items-center justify-center rounded-xl ${service.iconBg} border border-transparent group-hover:border-current group-hover:scale-110 transition-all duration-500 shadow-lg`}>
@@ -152,9 +164,10 @@ export default function Services() {
                                             <DialogTrigger asChild>
                                                 <Button
                                                     variant="outline"
-                                                    className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl group-hover:shadow-md"
+                                                    className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl group-hover:shadow-md group/btn"
                                                 >
-                                                    Saiba Mais
+                                                    <span>Saiba Mais</span>
+                                                    <ArrowRight className="size-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                                                 </Button>
                                             </DialogTrigger>
 
@@ -168,10 +181,10 @@ export default function Services() {
                                         </div>
                                     </div>
 
-                                    <DialogContent className="max-w-2xl border-2">
+                                    <DialogContent className="max-w-2xl border-2 bg-background/95 backdrop-blur-xl">
                                         <DialogHeader className="mb-8">
                                             <div className="flex items-start gap-6">
-                                                <div className={`w-20 h-20 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
+                                                <div className={`w-20 h-20 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-').replace('dark:text-', 'dark:border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
                                                     <Icon className={service.iconColor} size={40} strokeWidth={2.5} />
                                                 </div>
                                                 <div className="flex-1">
@@ -188,22 +201,22 @@ export default function Services() {
                                                 {service.details}
                                             </DialogDescription>
 
-                                            <div className={`p-6 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20`}>
+                                            <div className={`p-6 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20 backdrop-blur-sm`}>
                                                 <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                                                     Por que escolher este serviço?
                                                 </h4>
-                                                <ul className="space-y-2 text-sm text-muted-foreground">
+                                                <ul className="space-y-2.5 text-sm text-muted-foreground">
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-primary mt-0.5">✓</span>
+                                                        <span className="text-primary mt-0.5 font-bold">✓</span>
                                                         <span>Atendimento personalizado e estratégico</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-primary mt-0.5">✓</span>
+                                                        <span className="text-primary mt-0.5 font-bold">✓</span>
                                                         <span>Experiência comprovada em casos complexos</span>
                                                     </li>
                                                     <li className="flex items-start gap-2">
-                                                        <span className="text-primary mt-0.5">✓</span>
+                                                        <span className="text-primary mt-0.5 font-bold">✓</span>
                                                         <span>Comunicação clara e transparente</span>
                                                     </li>
                                                 </ul>
@@ -213,11 +226,17 @@ export default function Services() {
                                         <div className="flex flex-col gap-3 mt-8 pt-6 border-t">
                                             <Button
                                                 size="lg"
-                                                className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30 text-base"
+                                                className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30 text-base group"
                                                 onClick={handleScheduleDesktop}
                                             >
-                                                Agendar Consulta Gratuita
+                                                <span>Agendar Consulta Gratuita</span>
+                                                <ArrowRight className="size-5 ml-2 group-hover:translate-x-1 transition-transform" />
                                             </Button>
+                                            <DialogClose asChild>
+                                                <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
+                                                    Fechar
+                                                </Button>
+                                            </DialogClose>
                                         </div>
                                     </DialogContent>
                                 </Dialog>
@@ -244,10 +263,17 @@ export default function Services() {
                                                     onTouchStart={handleTouchStart}
                                                     onTouchMove={handleTouchMove}
                                                     onTouchEnd={handleTouchEnd}
-                                                    className="relative w-full bg-background rounded-2xl shadow-lg border border-border p-6 flex flex-col justify-between min-h-[400px] overflow-hidden"
+                                                    className="relative w-full bg-background rounded-2xl shadow-xl border border-border p-6 flex flex-col justify-between min-h-[420px] overflow-hidden"
                                                 >
                                                     {/* Gradient Background - Always visible on mobile */}
                                                     <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50`} />
+
+                                                    {/* Badge de destaque mobile */}
+                                                    <div className="absolute top-4 right-4">
+                                                        <div className="bg-primary/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                                                            <Sparkles className="size-3 text-primary" />
+                                                        </div>
+                                                    </div>
 
                                                     <div className="relative z-10 flex flex-col items-start text-left gap-5">
                                                         <div className={`w-16 h-16 flex items-center justify-center rounded-xl ${service.iconBg} border border-current shadow-lg`}>
@@ -265,9 +291,10 @@ export default function Services() {
                                                         <DialogTrigger asChild>
                                                             <Button
                                                                 variant="outline"
-                                                                className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl"
+                                                                className="w-full border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold rounded-xl group"
                                                             >
-                                                                Saiba Mais
+                                                                <span>Saiba Mais</span>
+                                                                <ArrowRight className="size-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                                             </Button>
                                                         </DialogTrigger>
 
@@ -281,10 +308,10 @@ export default function Services() {
                                                     </div>
                                                 </div>
 
-                                                <DialogContent className="max-w-[90vw] max-h-[85vh] overflow-y-auto border-2">
+                                                <DialogContent className="max-w-[90vw] max-h-[85vh] overflow-y-auto border-2 bg-background/95 backdrop-blur-xl">
                                                     <DialogHeader className="mb-6">
                                                         <div className="flex items-start gap-4">
-                                                            <div className={`w-16 h-16 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
+                                                            <div className={`w-16 h-16 ${service.iconBg} border-2 ${service.iconColor.replace('text-', 'border-').replace('dark:text-', 'dark:border-')} rounded-2xl flex items-center justify-center shrink-0 shadow-xl`}>
                                                                 <Icon className={service.iconColor} size={36} strokeWidth={2.5} />
                                                             </div>
                                                             <div className="flex-1">
@@ -301,22 +328,22 @@ export default function Services() {
                                                             {service.details}
                                                         </DialogDescription>
 
-                                                        <div className={`p-5 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20`}>
+                                                        <div className={`p-5 rounded-xl bg-gradient-to-br ${service.gradient} border border-primary/20 backdrop-blur-sm`}>
                                                             <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2 text-sm">
-                                                                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                                                                 Por que escolher este serviço?
                                                             </h4>
                                                             <ul className="space-y-2 text-sm text-muted-foreground">
                                                                 <li className="flex items-start gap-2">
-                                                                    <span className="text-primary mt-0.5">✓</span>
+                                                                    <span className="text-primary mt-0.5 font-bold">✓</span>
                                                                     <span>Atendimento personalizado e estratégico</span>
                                                                 </li>
                                                                 <li className="flex items-start gap-2">
-                                                                    <span className="text-primary mt-0.5">✓</span>
+                                                                    <span className="text-primary mt-0.5 font-bold">✓</span>
                                                                     <span>Experiência comprovada em casos complexos</span>
                                                                 </li>
                                                                 <li className="flex items-start gap-2">
-                                                                    <span className="text-primary mt-0.5">✓</span>
+                                                                    <span className="text-primary mt-0.5 font-bold">✓</span>
                                                                     <span>Comunicação clara e transparente</span>
                                                                 </li>
                                                             </ul>
@@ -326,11 +353,17 @@ export default function Services() {
                                                     <div className="flex flex-col gap-3 mt-6 pt-6 border-t">
                                                         <Button
                                                             size="lg"
-                                                            className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30"
+                                                            className="w-full font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/30 group"
                                                             onClick={handleScheduleMobile}
                                                         >
-                                                            Agendar Consulta Gratuita
+                                                            <span>Agendar Consulta Gratuita</span>
+                                                            <ArrowRight className="size-5 ml-2 group-hover:translate-x-1 transition-transform" />
                                                         </Button>
+                                                        <DialogClose asChild>
+                                                            <Button variant="ghost" className="w-full rounded-xl hover:bg-muted">
+                                                                Fechar
+                                                            </Button>
+                                                        </DialogClose>
                                                     </div>
                                                 </DialogContent>
                                             </Dialog>
