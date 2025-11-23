@@ -6,6 +6,7 @@ import "./globals.css"
 import { WhatsappButton } from "@/components/whatsapp-button"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
+import CookieBanner from "@/components/cookie-banner" // Importei o banner
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -40,6 +41,7 @@ export default function RootLayout({
         >
             {children}
             <WhatsappButton />
+            <CookieBanner /> {/* Botei ele aqui pra rodar no site todo */}
             <Analytics />
             <Toaster />
         </ThemeProvider>

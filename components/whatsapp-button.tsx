@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 
 export const WhatsappButton = () => {
@@ -9,7 +8,7 @@ export const WhatsappButton = () => {
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     return (
-        <Link
+        <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -19,14 +18,15 @@ export const WhatsappButton = () => {
         w-16 h-16
         bg-[#25D366] text-white
         rounded-full
-        shadow-lg
+        shadow-xl shadow-green-900/20
         transition-all duration-300 ease-in-out
-        hover:scale-110 hover:shadow-xl
-        animate-wpp-pulse /* A animação do app/globals.css */
+        hover:scale-110 hover:-translate-y-1
+        animate-bounce-slow
+        border-2 border-white/20
       "
             aria-label="Entre em contato pelo WhatsApp"
         >
-            <FaWhatsapp className="w-8 h-8" />
-        </Link>
+            <FaWhatsapp className="w-9 h-9" />
+        </a>
     );
 };

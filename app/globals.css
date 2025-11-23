@@ -14,7 +14,7 @@
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.20 0.02 260);
 
-    --primary: oklch(0.30 0.05 260); /* Azul Marinho Clássico */
+    --primary: oklch(0.394 0.079 258.933); /* Azul Marinho Clássico */
     --primary-foreground: oklch(0.98 0.01 40);
 
     --secondary: oklch(0.95 0.01 40);
