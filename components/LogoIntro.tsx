@@ -1,4 +1,4 @@
-"use client" // Necessário para hooks no App Router
+"use client"
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -8,20 +8,17 @@ type LogoIntroProps = {
 };
 
 export default function LogoIntro({ onAnimationComplete }: LogoIntroProps) {
-    const [isVisible, setIsVisible] = useState<boolean>(true);
     const [isAnimatingOut, setIsAnimatingOut] = useState<boolean>(false);
 
     useEffect(() => {
+        // Reduzi o tempo pra ser mais rápido (vapt-vupt)
         const timer = setTimeout(() => {
             setIsAnimatingOut(true);
-        }, 1000);
+        }, 800);
 
         const totalDuration = setTimeout(() => {
-            setIsVisible(false);
-            if (onAnimationComplete) {
-                onAnimationComplete();
-            }
-        }, 1800);
+            onAnimationComplete();
+        }, 1300);
 
         return () => {
             clearTimeout(timer);
@@ -29,24 +26,18 @@ export default function LogoIntro({ onAnimationComplete }: LogoIntroProps) {
         };
     }, [onAnimationComplete]);
 
-    if (!isVisible) return null;
-
     return (
         <div
-            className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-opacity duration-700 ease-in-out
-                ${isAnimatingOut ? 'opacity-0' : 'opacity-100'}`}
+            // Mudei bg-black para bg-background para respeitar o tema (creme ou azul escuro)
+            className={`fixed inset-0 z-[9999] flex items-center justify-center bg-background transition-opacity duration-500 ease-in-out
+                ${isAnimatingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         >
-
-            <div
-                className={`animate-fade-in-up animate-scale-in-delay ${
-                    isAnimatingOut ? 'opacity-0 transform -translate-y-4' : ''
-                } transition-all duration-700 ease-in-out`}
-            >
+            <div className="relative w-80 h-80 animate-pulse">
                 <Image
                     src="/lg.svg"
                     alt="Logo Emanuel Silvestre"
-                    width={500}
-                    height={500}
+                    fill
+                    className="object-contain"
                     priority
                 />
             </div>
