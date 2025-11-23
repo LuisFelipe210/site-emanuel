@@ -61,7 +61,7 @@ export default function Navigation() {
                         <Link href="/" className="flex items-center gap-3 group">
                             <div className="relative h-10 w-10">
                                 <Image
-                                    src="/lg.svg"
+                                    src="logo.png"
                                     alt="Logo Emanuel Silvestre"
                                     width={40}
                                     height={40}
