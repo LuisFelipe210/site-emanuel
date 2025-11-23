@@ -41,7 +41,7 @@ export default function Navigation() {
     const links = [
         { label: "Início", href: "#home" },
         { label: "Áreas de Atuação", href: "#servicos" },
-        { label: "O Escritório", href: "#sobre" },
+        { label: "O Advogado", href: "#sobre" },
         { label: "Dúvidas", href: "#faq" },
     ]
 
@@ -84,7 +84,7 @@ export default function Navigation() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                                    className="text-base font-semibold text-foreground/80 hover:text-primary transition-colors"
                                 >
                                     {link.label}
                                 </Link>
@@ -96,11 +96,11 @@ export default function Navigation() {
 
                             <Button
                                 asChild
-                                size="sm"
-                                className="font-semibold px-5 rounded-md shadow-sm bg-primary text-primary-foreground hover:bg-primary/90"
+                                size="lg"
+                                className="font-bold px-5 rounded-md shadow-sm bg-primary text-primary-foreground hover:bg-primary/90 text-sm"
                             >
                                 <Link href="#contato">
-                                    <Phone className="mr-2 h-3 w-3" />
+                                    <Phone className="mr-2 h-4 w-4" />
                                     Fale Conosco
                                 </Link>
                             </Button>
