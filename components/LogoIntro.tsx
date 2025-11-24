@@ -12,11 +12,11 @@ export default function LogoIntro({ onAnimationComplete }: LogoIntroProps) {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsAnimatingOut(true);
-        }, 800);
+        }, 500);
 
         const totalDuration = setTimeout(() => {
             onAnimationComplete();
-        }, 1300);
+        }, 1000);
 
         return () => {
             clearTimeout(timer);

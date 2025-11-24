@@ -90,7 +90,7 @@ export default function LeadMagnet() {
                     <div className="flex-1 space-y-6 text-center lg:text-left">
                         <div>
                             <h3 className="text-3xl font-bold mb-2">
-                                Vai dar entrada na Aposentadoria?
+                                Vai dar entrada na Aposentadoria Rural?
                             </h3>
                             <p className="text-lg text-muted-foreground">
                                 Baixe agora o nosso <span className="font-bold text-foreground">Checklist de Documentos Obrigatórios</span> e evite que seu benefício seja negado por falta de papelada.
