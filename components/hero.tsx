@@ -17,10 +17,7 @@ export default function Hero() {
                     src="/manel.jpg"
                     alt="Dr. Emanuel Silvestre"
                     fill
-                    // MUDANÇA AQUI:
-                    // No mobile, mudei de 'object-center' para 'object-[70%_center]'
-                    // Isso empurra o foco da imagem mais para a direita da tela no celular.
-                    // Se quiser mais para a direita, aumente para 80%. Se quiser menos, diminua para 60%.
+
                     className="object-cover object-[20%_center] lg:object-left-top"
                     priority
                 />
@@ -46,13 +43,13 @@ export default function Hero() {
 
                     {/* Título  */}
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-foreground drop-shadow-md lg:drop-shadow-none">
-                        Aposentadoria Negada? <br />
-                        <span className="text-primary">Pare de Perder Dinheiro.</span>
+                        Benefício negado? <br />
+                        <span className="text-primary">Não desista do seu direito.</span>
                     </h1>
 
                     {/* Texto  */}
                     <p className="text-xl sm:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium drop-shadow-sm lg:drop-shadow-none">
-                        Não aceite o "não" do INSS. Recuperamos seu direito e garantimos o teto. Análise rápida e sem "juridiquês".
+                        Não aceite o não do INSS. Buscaremos a concessão do seu benefício. Análise rápida e sem juridiquês..
                     </p>
 
                     {/* Botões */}
