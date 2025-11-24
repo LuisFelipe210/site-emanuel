@@ -87,7 +87,7 @@ export default function CTA() {
                                 </div>
                                 <div>
                                     <p className="text-sm font-medium opacity-80 group-hover:opacity-100">WhatsApp / Telefone</p>
-                                    <p className="text-xl font-bold group-hover:underline decoration-2 underline-offset-4">(87) 99612-8608</p>
+                                    <p className="text-sm font-bold group-hover:underline decoration-2 underline-offset-4">(87) 99612-8608</p>
                                 </div>
                             </a>
 
@@ -101,7 +101,7 @@ export default function CTA() {
                                 </div>
                                 <div className="min-w-0"> {/* min-w-0 ajuda a quebrar texto longo */}
                                     <p className="text-sm font-medium opacity-80 group-hover:opacity-100">Email</p>
-                                    <p className="text-lg font-semibold break-all group-hover:underline decoration-2 underline-offset-4">
+                                    <p className="text-sm font-semibold break-all group-hover:underline decoration-2 underline-offset-4">
                                         emanuelsilvestre.adv@gmail.com
                                     </p>
                                 </div>
@@ -114,7 +114,7 @@ export default function CTA() {
                                 </div>
                                 <div>
                                     <p className="text-sm font-medium opacity-80">Escritório</p>
-                                    <p className="text-lg font-semibold">Campo Formoso, BA</p>
+                                    <p className="text-sm font-semibold">Campo Formoso, BA</p>
                                 </div>
                             </div>
                         </div>

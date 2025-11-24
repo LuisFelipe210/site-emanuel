@@ -48,7 +48,7 @@ export default function Hero() {
                         </Button>
                     </div>
 
-                    <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-muted-foreground pt-2">
+                    <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-sl text-muted-foreground pt-2">
                         <div className="flex items-center gap-1">
                             <CheckCircle2 className="text-green-600 h-4 w-4" />
                             <span>Atendimento Online em todo Brasil</span>

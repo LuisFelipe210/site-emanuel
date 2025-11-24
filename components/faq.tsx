@@ -9,6 +9,10 @@ import {
 
 const faqs = [
     {
+        question: "Trabalhei na roça mas nunca paguei INSS. Posso me aposentar?",
+        answer: "Com certeza! O trabalhador rural (segurado especial) tem direito a se aposentar 5 anos mais cedo (60 anos homem / 55 anos mulher) sem precisar ter pago o carnê mensal. O que vale é comprovar o tempo de trabalho no campo com documentos (notas, certidões de casamento/nascimento, contratos), e nós te ajudamos a reunir toda essa prova.",
+    },
+    {
         question: "O INSS negou meu pedido. Ainda tem jeito?",
         answer: "Sim! A negativa do INSS é muito comum, muitas vezes por falha na análise administrativa. Nós analisamos o motivo da recusa e entramos com recurso administrativo ou ação judicial para reverter essa decisão e garantir seu direito, inclusive com pagamentos retroativos.",
     },
@@ -23,10 +27,6 @@ const faqs = [
     {
         question: "Atende pessoas de outros estados?",
         answer: "Sim. O processo previdenciário hoje é 100% digital (Meu INSS e PJE). Atendemos clientes de todo o Brasil através de videochamadas e WhatsApp, com a mesma segurança de um atendimento presencial.",
-    },
-    {
-        question: "O que é Planejamento Previdenciário?",
-        answer: "É um estudo detalhado do seu histórico de trabalho para calcular quando você vai se aposentar e qual será o valor. Muitas vezes, pagar alguns meses a mais ou mudar a categoria de contribuição pode aumentar muito seu benefício vitalício.",
     },
 ]
 

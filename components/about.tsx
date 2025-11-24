@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export default function About() {
     return (
-        <section id="sobre" className="py-16 lg:py-24 bg-background text-foreground overflow-hidden">
+        <section id="sobre" className="py-16 lg:py-24 bg-muted/30 text-foreground overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
