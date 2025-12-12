@@ -11,22 +11,11 @@ import Testimonials from "@/components/testimonials"
 import FAQ from "@/components/faq"
 import CTA from "@/components/cta"
 import Footer from "@/components/footer"
-import LogoIntro from "@/components/LogoIntro"
 import About from "@/components/about"
 
 export default function Home() {
-    const [showIntro, setShowIntro] = useState<boolean>(true);
-
-    const handleIntroComplete = () => {
-        setShowIntro(false);
-    };
-
     return (
-        <>
-            {showIntro && <LogoIntro onAnimationComplete={handleIntroComplete} />}
-
             <main
-                className={`${showIntro ? 'hidden' : 'flex'} flex-col`}
             >
                 <Navigation />
 
@@ -48,6 +37,5 @@ export default function Home() {
 
                 <Footer />
             </main>
-        </>
     )
 }
