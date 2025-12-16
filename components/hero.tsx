@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowRight, CheckCircle2, MapPin } from "lucide-react"
+import { ArrowRight, CheckCircle2, Scale, FileSearch } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -9,55 +9,66 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="relative flex min-h-[85vh] w-full flex-col justify-center bg-background overflow-hidden pt-32 lg:pt-44 pb-12"
+            className="relative flex min-h-[100vh] w-full items-center bg-background overflow-hidden pt-20 lg:pt-0"
         >
-            {/* === ÁREA DA IMAGEM (LADO DIREITO) === */}
-            <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[60%] z-0">
+            {/* === ÁREA DA IMAGEM (ESTILO ORIGINAL RESTAURADO) === */}
+            {/* Escondido no mobile (hidden), aparece full no desktop (lg:block) */}
+            <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[55%] z-0">
                 <Image
                     src="/manel.jpg"
                     alt="Dr. Emanuel Silvestre"
                     fill
-
-                    className="object-cover object-[20%_center] lg:object-left-top"
+                    className="object-cover object-[center_top] lg:object-left-top"
                     priority
+                    quality={100}
                 />
 
-                {/* Degradê mantido */}
-                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent lg:from-background lg:via-background/60 lg:to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent lg:hidden" />
+                {/* Degradê pra fundir a imagem com o fundo branco da esquerda */}
+                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
+
+                {/* Um degradê extra na base pra garantir leitura se tiver texto embaixo */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            {/* === CONTEÚDO === */}
+            {/* === CONTEÚDO (TEXTO NOVO) === */}
             <div className="relative z-10 container mx-auto px-6 h-full flex flex-col justify-center">
 
-                <div className="w-full lg:max-w-2xl lg:ml-24 space-y-8 animate-in fade-in-0 slide-in-from-left-5 duration-700">
+                <div className="w-full lg:max-w-2xl lg:ml-12 space-y-8 animate-in fade-in-0 slide-in-from-left-6 duration-700">
 
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm sm:text-base font-semibold text-primary w-fit backdrop-blur-sm shadow-sm">
-                        <span className="relative flex h-2.5 w-2.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+                    {/* BADGE EDITORIAL (O novo que tu curtiu) */}
+                    <div className="flex items-center gap-4">
+                        <div className="h-[2px] w-12 bg-primary"></div>
+                        <span className="text-sm font-bold tracking-[0.2em] uppercase text-primary/90">
+                            Direito Previdenciário
                         </span>
-                        Especialista em INSS
                     </div>
 
-                    {/* Título  */}
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-foreground drop-shadow-md lg:drop-shadow-none">
-                        Benefício negado? <br />
-                        <span className="text-primary">Não desista do seu direito.</span>
+                    {/* TÍTULO COM O "NEGADO" VERMELHO SANGUE */}
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground drop-shadow-sm">
+                        <span className="block text-foreground leading-snug">
+                            Benefício
+                            {/* Wrapper do destaque vermelho */}
+                            <span className="relative whitespace-nowrap inline-block mx-3">
+                                <span className="absolute inset-0 -rotate-2 bg-red-800 rounded-sm shadow-sm" />
+                                <span className="relative text-white px-2">negado?</span>
+                            </span>
+                        </span>
+                        <span className="text-primary block mt-2">
+                            Não aceite o "não" <br className="hidden lg:block" /> do INSS.
+                        </span>
                     </h1>
 
-                    {/* Texto  */}
-                    <p className="text-xl sm:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium drop-shadow-sm lg:drop-shadow-none">
-                        Não aceite o não do INSS. Buscaremos a concessão do seu benefício. Análise rápida e sem juridiquês..
+                    {/* TEXTO DE APOIO */}
+                    <p className="text-xl sm:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium border-l-[3px] border-primary/40 pl-5">
+                        A negativa não é o fim. É o momento de agir com técnica. Analisamos seu caso rápido e sem juridiquês.
                     </p>
 
-                    {/* Botões */}
+                    {/* BOTÕES GRANDES */}
                     <div className="flex flex-col sm:flex-row gap-4 pt-2">
                         <Button
                             asChild
                             size="lg"
-                            className="w-full sm:w-auto font-bold text-lg h-14 px-8 rounded-xl shadow-lg hover:shadow-primary/25 transition-transform hover:-translate-y-0.5"
+                            className="w-full sm:w-auto font-bold text-lg h-14 px-8 rounded-xl shadow-lg hover:shadow-primary/25 transition-transform hover:-translate-y-1"
                         >
                             <Link href="https://wa.me/5587996128608?text=Olá,%20quero%20analisar%20minha%20aposentadoria." target="_blank">
                                 Falar com Advogado
@@ -66,23 +77,36 @@ export default function Hero() {
                         </Button>
 
                         <Button
+                            asChild
                             variant="outline"
                             size="lg"
-                            className="w-full sm:w-auto font-semibold text-lg h-14 px-8 rounded-xl border-2 bg-background/60 backdrop-blur-md"
+                            className="w-full sm:w-auto font-semibold text-lg h-14 px-8 rounded-xl border-2 bg-background/60 backdrop-blur-md hover:bg-secondary/50"
                         >
-                            Conhecer o Escritório
+                            <Link href="#servicos">
+                                Entender meus Direitos
+                            </Link>
                         </Button>
                     </div>
 
-                    {/* Badges do rodapé */}
-                    <div className="flex flex-wrap gap-6 text-sm sm:text-base font-medium text-muted-foreground pt-4 border-t border-border/20 max-w-xl">
-                        <div className="flex items-center gap-2">
-                            <CheckCircle2 className="text-green-600 h-4 w-4" />
-                            <span>Atendimento Online</span>
+                    {/* BADGES DO RODAPÉ (TRUST MARKERS) */}
+                    <div className="pt-6 border-t border-border/40 grid grid-cols-2 gap-6 max-w-md">
+                        <div className="flex items-start gap-3">
+                            <div className="text-primary shrink-0 mt-1">
+                                <Scale className="h-5 w-5" />
+                            </div>
+                            <div>
+                                <p className="font-bold text-foreground text-sm">Defesa Técnica</p>
+                                <p className="text-xs text-muted-foreground">Especializada no INSS</p>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <MapPin className="text-blue-600 h-4 w-4" />
-                            <span>Presencial e Digital</span>
+                        <div className="flex items-start gap-3">
+                            <div className="text-primary shrink-0 mt-1">
+                                <FileSearch className="h-5 w-5" />
+                            </div>
+                            <div>
+                                <p className="font-bold text-foreground text-sm">Análise Completa</p>
+                                <p className="text-xs text-muted-foreground">Do seu histórico</p>
+                            </div>
                         </div>
                     </div>
                 </div>

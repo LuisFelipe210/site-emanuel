@@ -16,7 +16,7 @@ export const WhatsappButton = () => {
         fixed bottom-6 right-6 z-50
         flex items-center justify-center
         w-16 h-16
-        bg-[#25D366] text-white
+        bg-primary text-white
         rounded-full
         shadow-xl shadow-green-900/20
         transition-all duration-300 ease-in-out
