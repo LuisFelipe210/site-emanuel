@@ -49,7 +49,7 @@ export default function Hero() {
                             Benefício
                             {/* Wrapper do destaque vermelho */}
                             <span className="relative whitespace-nowrap inline-block mx-3">
-                                <span className="absolute inset-0 -rotate-2 bg-red-800 rounded-sm shadow-sm" />
+                                <span className="absolute inset-0 -rotate-1 bg-primary rounded-sm shadow-sm" />
                                 <span className="relative text-white px-2">negado?</span>
                             </span>
                         </span>
