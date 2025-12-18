@@ -189,7 +189,7 @@ export default function LeadMagnet() {
                         </Dialog>
 
                         <p className="text-xs text-muted-foreground mt-4 italic">
-                            *Mais de 1.200 trabalhadores rurais já baixaram esse material.
+                            *Mais de 500 trabalhadores rurais já baixaram esse material.
                         </p>
                     </div>
                 </div>

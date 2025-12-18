@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowRight, CheckCircle2, Scale, FileSearch } from "lucide-react"
+import { ArrowRight, Scale, FileSearch } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -9,10 +9,25 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="relative flex min-h-[100vh] w-full items-center bg-background overflow-hidden pt-20 lg:pt-0"
+            // MOBILE: flex-col e justify-end (joga tudo pra baixo)
+            // DESKTOP: items-center (centraliza verticalmente como antes)
+            className="relative flex min-h-[100vh] w-full flex-col justify-end lg:justify-center lg:items-center bg-background overflow-hidden pt-20 lg:pt-0"
         >
-            {/* === ÁREA DA IMAGEM (ESTILO ORIGINAL RESTAURADO) === */}
-            {/* Escondido no mobile (hidden), aparece full no desktop (lg:block) */}
+            {/* === IMAGEM MOBILE (MODO FANTASMA) === */}
+            <div className="absolute inset-0 lg:hidden z-0 pointer-events-none">
+                <Image
+                    src="/manel.jpg"
+                    alt="Dr. Emanuel Silvestre"
+                    fill
+                    className="object-cover object-top opacity-[0.12] grayscale" // Opacidade bem baixa pra não atrapalhar
+                    priority
+                    quality={100}
+                />
+                {/* Degradê vindo de baixo pra cima pra garantir leitura total no rodapé */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+            </div>
+
+            {/* === IMAGEM DESKTOP (MANTIDA) === */}
             <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[55%] z-0">
                 <Image
                     src="/manel.jpg"
@@ -22,33 +37,30 @@ export default function Hero() {
                     priority
                     quality={100}
                 />
-
-                {/* Degradê pra fundir a imagem com o fundo branco da esquerda */}
                 <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
-
-                {/* Um degradê extra na base pra garantir leitura se tiver texto embaixo */}
                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            {/* === CONTEÚDO (TEXTO NOVO) === */}
-            <div className="relative z-10 container mx-auto px-6 h-full flex flex-col justify-center">
+            {/* === CONTEÚDO === */}
+            {/* MOBILE: pb-12 (padding embaixo pra não colar na borda) */}
+            <div className="relative z-10 container mx-auto px-6 pb-12 lg:pb-0 lg:h-full flex flex-col justify-end lg:justify-center">
 
-                <div className="w-full lg:max-w-2xl lg:ml-12 space-y-8 animate-in fade-in-0 slide-in-from-left-6 duration-700">
+                <div className="w-full lg:max-w-2xl lg:ml-12 space-y-6 lg:space-y-8 animate-in fade-in-0 slide-in-from-bottom-6 duration-700">
 
-                    {/* BADGE EDITORIAL (O novo que tu curtiu) */}
+                    {/* BADGE */}
                     <div className="flex items-center gap-4">
                         <div className="h-[2px] w-12 bg-primary"></div>
-                        <span className="text-sm font-bold tracking-[0.2em] uppercase text-primary/90">
+                        <span className="text-xs lg:text-sm font-bold tracking-[0.2em] uppercase text-primary/90">
                             Direito Previdenciário
                         </span>
                     </div>
 
-                    {/* TÍTULO COM O "NEGADO" VERMELHO SANGUE */}
+                    {/* TÍTULO */}
+                    {/* Ajustei o tamanho da fonte mobile (text-4xl) pra não quebrar palavras grandes feio */}
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground drop-shadow-sm">
                         <span className="block text-foreground leading-snug">
                             Benefício
-                            {/* Wrapper do destaque vermelho */}
-                            <span className="relative whitespace-nowrap inline-block mx-3">
+                            <span className="relative whitespace-nowrap inline-block mx-2 lg:mx-3">
                                 <span className="absolute inset-0 -rotate-1 bg-primary rounded-sm shadow-sm" />
                                 <span className="relative text-white px-2">negado?</span>
                             </span>
@@ -59,12 +71,13 @@ export default function Hero() {
                     </h1>
 
                     {/* TEXTO DE APOIO */}
-                    <p className="text-xl sm:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium border-l-[3px] border-primary/40 pl-5">
+                    <p className="text-lg text-muted-foreground leading-relaxed max-w-xl font-medium border-l-[3px] border-primary/40 pl-5">
                         A negativa não é o fim. É o momento de agir com técnica. Analisamos seu caso rápido e sem juridiquês.
                     </p>
 
-                    {/* BOTÕES GRANDES */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                    {/* BOTÕES */}
+                    {/* No mobile, os botões ocupam largura total e ficam empilhados */}
+                    <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-2">
                         <Button
                             asChild
                             size="lg"
@@ -88,8 +101,9 @@ export default function Hero() {
                         </Button>
                     </div>
 
-                    {/* BADGES DO RODAPÉ (TRUST MARKERS) */}
-                    <div className="pt-6 border-t border-border/40 grid grid-cols-2 gap-6 max-w-md">
+                    {/* BADGES DO RODAPÉ */}
+                    {/* Escondi um pouco no mobile muito pequeno se precisar, ou mantive layout compacto */}
+                    <div className="pt-4 lg:pt-6 border-t border-border/40 grid grid-cols-2 gap-4 max-w-md">
                         <div className="flex items-start gap-3">
                             <div className="text-primary shrink-0 mt-1">
                                 <Scale className="h-5 w-5" />
