@@ -73,7 +73,6 @@ export default function Navigation() {
                             href="/"
                             className="flex items-center gap-3 group relative z-50 shrink-0"
                         >
-                            <div className="relative h-15 w-15 overflow-hidden rounded-lg flex items-center justify-center border border-primary/20 transition-transform group-hover:scale-105">
                                 <Image
                                     src="/logo.png"
                                     alt="ES"
@@ -81,7 +80,6 @@ export default function Navigation() {
                                     height={60}
                                     className="object-contain p-1"
                                 />
-                            </div>
                         </Link>
 
                         {/* --- MENU DESKTOP --- */}
