@@ -73,22 +73,14 @@ export default function Navigation() {
                             href="/"
                             className="flex items-center gap-3 group relative z-50 shrink-0"
                         >
-                            <div className="relative h-10 w-10 overflow-hidden rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20 transition-transform group-hover:scale-105">
+                            <div className="relative h-15 w-15 overflow-hidden rounded-lg flex items-center justify-center border border-primary/20 transition-transform group-hover:scale-105">
                                 <Image
                                     src="/logo.png"
                                     alt="ES"
-                                    width={40}
-                                    height={40}
+                                    width={60}
+                                    height={60}
                                     className="object-contain p-1"
                                 />
-                            </div>
-                            <div className={`flex flex-col transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-90'}`}>
-                                <span className="text-lg font-bold text-foreground leading-none tracking-tight group-hover:text-primary transition-colors">
-                                    Emanuel Silvestre
-                                </span>
-                                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
-                                    Advocacia
-                                </span>
                             </div>
                         </Link>
 
