@@ -155,17 +155,6 @@ export default function Footer() {
                     <div className="mt-8 flex flex-col gap-4 text-sm text-azul-claro sm:flex-row sm:items-center sm:justify-between">
                         <p>&copy; {ano} Emanuel Silvestre Advocacia. Todos os direitos reservados.</p>
                         <div className="flex items-center gap-6">
-                            <p>
-                                Desenvolvido por{" "}
-                                <a
-                                    href="https://luisfelipedev.vercel.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-bold text-white hover:text-ouro-claro hover:underline"
-                                >
-                                    Luis Felipe
-                                </a>
-                            </p>
                             <button
                                 type="button"
                                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
