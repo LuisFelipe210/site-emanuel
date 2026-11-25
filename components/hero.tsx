@@ -1,128 +1,102 @@
 "use client"
 
+import { useRef } from "react"
 import Image from "next/image"
-import { ArrowRight, Scale, FileSearch } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { motion, useScroll } from "framer-motion"
+import { FaWhatsapp } from "react-icons/fa"
+import { SertaoFundo, SertaoFrente } from "@/components/sertao"
+import { waLink } from "@/lib/contato"
 
 export default function Hero() {
+    const ref = useRef<HTMLElement>(null)
+    const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
+
     return (
         <section
             id="home"
-            // MOBILE: flex-col e justify-end (joga tudo pra baixo)
-            // DESKTOP: items-center (centraliza verticalmente como antes)
-            className="relative flex min-h-[100vh] w-full flex-col justify-end lg:justify-center lg:items-center bg-background overflow-hidden pt-20 lg:pt-0"
+            ref={ref}
+            className="relative isolate overflow-hidden bg-cal xl:min-h-[max(100svh,820px)]"
         >
-            {/* === IMAGEM MOBILE (MODO FANTASMA) === */}
-            <div className="absolute inset-0 lg:hidden z-0 pointer-events-none">
-                <Image
-                    src="/manel.jpg"
-                    alt="Dr. Emanuel Silvestre"
-                    fill
-                    className="object-cover object-top opacity-[0.12] grayscale" // Opacidade bem baixa pra não atrapalhar
-                    priority
-                    quality={100}
-                />
-                {/* Degradê vindo de baixo pra cima pra garantir leitura total no rodapé */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-            </div>
-
-            {/* === IMAGEM DESKTOP (MANTIDA) === */}
-            <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[55%] z-0">
-                <Image
-                    src="/manel.jpg"
-                    alt="Dr. Emanuel Silvestre"
-                    fill
-                    className="object-cover object-[center_top] lg:object-left-top"
-                    priority
-                    quality={100}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-            </div>
-
-            {/* === CONTEÚDO === */}
-            {/* MOBILE: pb-12 (padding embaixo pra não colar na borda) */}
-            <div className="relative z-10 container mx-auto px-6 pb-12 lg:pb-0 lg:h-full flex flex-col justify-end lg:justify-center">
-
-                <div className="w-full lg:max-w-2xl lg:ml-12 space-y-6 lg:space-y-8 animate-in fade-in-0 slide-in-from-bottom-6 duration-700">
-
-                    {/* BADGE */}
-                    <div className="flex items-center gap-4">
-                        <div className="h-[2px] w-12 bg-primary"></div>
-                        <span className="text-xs lg:text-sm font-bold tracking-[0.2em] uppercase text-primary/90">
-                            Direito Previdenciário
-                        </span>
-                    </div>
-
-                    {/* TÍTULO */}
-                    {/* Ajustei o tamanho da fonte mobile (text-4xl) pra não quebrar palavras grandes feio */}
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground drop-shadow-sm">
-                        <span className="block text-foreground leading-snug">
-                            Benefício
-                            <span className="relative whitespace-nowrap inline-block mx-2 lg:mx-3">
-                                <span className="absolute inset-0 -rotate-1 bg-primary rounded-sm shadow-sm" />
-                                <span className="relative text-white px-2">negado?</span>
+            {/* TEXTO */}
+            <div className="relative z-30 mx-auto w-full max-w-7xl px-5 pt-28 sm:px-8 xl:pb-6 xl:pt-36">
+                <div className="max-w-[46rem]">
+                    <h1 className="text-azul-noite">
+                        <span className="block font-display text-[2rem] font-medium leading-tight sm:text-5xl xl:text-[3.4rem]">
+                            Benefício{" "}
+                            <span className="relative inline-block">
+                                <motion.span
+                                    aria-hidden="true"
+                                    className="absolute -inset-x-1.5 bottom-[0.06em] top-[0.42em] -z-10 origin-left bg-ouro-claro"
+                                    initial={{ scaleX: 0 }}
+                                    animate={{ scaleX: 1 }}
+                                    transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                                />
+                                negado?
                             </span>
                         </span>
-                        <span className="text-primary block mt-2">
-                            Não aceite o "não" <br className="hidden lg:block" /> do INSS.
+                        <span className="mt-2 block font-largo text-[2.05rem] uppercase leading-[0.98] text-azul sm:text-6xl xl:text-[5.1rem]">
+                            Não aceite <br />o “não” <br className="hidden sm:block" />
+                            do INSS.
                         </span>
                     </h1>
 
-                    {/* TEXTO DE APOIO */}
-                    <p className="text-lg text-muted-foreground leading-relaxed max-w-xl font-medium border-l-[3px] border-primary/40 pl-5">
-                        A negativa não é o fim. É o momento de agir com técnica. Analisamos seu caso rápido e sem juridiquês.
+                    <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-azul-noite/85 xl:text-xl">
+                        A negativa não é o fim. É o momento de agir com técnica. Analisamos seu caso rápido e sem
+                        juridiquês.
                     </p>
 
-                    {/* BOTÕES */}
-                    {/* No mobile, os botões ocupam largura total e ficam empilhados */}
-                    <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-2">
-                        <Button
-                            asChild
-                            size="lg"
-                            className="w-full sm:w-auto font-bold text-lg h-14 px-8 rounded-xl shadow-lg hover:shadow-primary/25 transition-transform hover:-translate-y-1"
+                    <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-7">
+                        <a
+                            href={waLink("Olá, quero analisar minha aposentadoria.")}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex h-16 items-center justify-center gap-3 rounded-md bg-azul px-7 text-lg font-bold text-white shadow-[0_10px_24px_-10px_rgba(13,27,69,0.55)] transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-azul-noite"
                         >
-                            <Link href="https://wa.me/5587996128608?text=Olá,%20quero%20analisar%20minha%20aposentadoria." target="_blank">
-                                Falar com Advogado
-                                <ArrowRight className="ml-2 size-5" />
-                            </Link>
-                        </Button>
-
-                        <Button
-                            asChild
-                            variant="outline"
-                            size="lg"
-                            className="w-full sm:w-auto font-semibold text-lg h-14 px-8 rounded-xl border-2 bg-background/60 backdrop-blur-md hover:bg-secondary/50"
+                            <FaWhatsapp className="size-6 text-ouro-claro" aria-hidden="true" />
+                            Falar com o advogado
+                        </a>
+                        <a
+                            href="#tenho-direito"
+                            className="inline-flex items-center gap-2 self-start py-2 text-lg font-bold text-azul underline decoration-ouro decoration-2 underline-offset-[0.3em] transition-colors hover:text-azul-noite sm:self-auto"
                         >
-                            <Link href="#servicos">
-                                Entender meus Direitos
-                            </Link>
-                        </Button>
+                            Entender meus direitos
+                        </a>
                     </div>
 
-                    {/* BADGES DO RODAPÉ */}
-                    {/* Escondi um pouco no mobile muito pequeno se precisar, ou mantive layout compacto */}
-                    <div className="pt-4 lg:pt-6 border-t border-border/40 grid grid-cols-2 gap-4 max-w-md">
-                        <div className="flex items-start gap-3">
-                            <div className="text-primary shrink-0 mt-1">
-                                <Scale className="h-5 w-5" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-foreground text-sm">Defesa Técnica</p>
-                                <p className="text-xs text-muted-foreground">Especializada no INSS</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                            <div className="text-primary shrink-0 mt-1">
-                                <FileSearch className="h-5 w-5" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-foreground text-sm">Análise Completa</p>
-                                <p className="text-xs text-muted-foreground">Do seu histórico</p>
-                            </div>
-                        </div>
-                    </div>
+                    <p className="mt-6 text-[0.95rem] text-azul-noite/75">
+                        Dr. Emanuel Silvestre · OAB/BA 79.803 · Atendimento em todo o Brasil
+                    </p>
+                </div>
+            </div>
+
+            {/* PAISAGEM + RETRATO
+                Mobile: bloco abaixo do texto. Desktop: metade de baixo da tela, atrás do texto
+                (do lado do texto só passa céu e serra clara, para manter o contraste). */}
+            <div className="relative mt-8 h-[400px] sm:h-[440px] xl:absolute xl:inset-x-0 xl:bottom-0 xl:mt-0 xl:h-[50%]">
+                <div className="absolute inset-0 z-0">
+                    <SertaoFundo progresso={scrollYProgress} />
+                </div>
+
+                {/* Dr. Emanuel recortado e colado na paisagem, entre os morros e o chão da frente */}
+                <motion.div
+                    className="absolute bottom-[4%] right-[3%] z-10 h-[92%] w-auto sm:right-[8%] xl:bottom-[6%] xl:right-[7%] xl:h-[160%]"
+                    initial={{ y: 40 }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1.2, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <Image
+                        src="/emanuel-recorte.webp"
+                        alt="Dr. Emanuel Silvestre, de blazer azul-marinho e braços cruzados, sorrindo"
+                        width={583}
+                        height={1078}
+                        priority
+                        sizes="(max-width: 1024px) 60vw, 30vw"
+                        className="h-full w-auto object-contain object-bottom"
+                    />
+                </motion.div>
+
+                <div className="pointer-events-none absolute inset-0 z-20">
+                    <SertaoFrente />
                 </div>
             </div>
         </section>

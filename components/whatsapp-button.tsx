@@ -1,32 +1,18 @@
 "use client"
 
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa"
+import { waLink } from "@/lib/contato"
 
 export const WhatsappButton = () => {
-    const phoneNumber = "5587996128608";
-    const message = "Olá! Vim pelo site e gostaria de agendar uma consulta.";
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
     return (
         <a
-            href={whatsappUrl}
+            href={waLink("Olá! Vim pelo site e gostaria de agendar uma consulta.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-        fixed bottom-6 right-6 z-50
-        flex items-center justify-center
-        w-16 h-16
-        bg-primary text-white
-        rounded-full
-        shadow-xl shadow-green-900/20
-        transition-all duration-300 ease-in-out
-        hover:scale-110 hover:-translate-y-1
-        animate-bounce-slow
-        border-2 border-white/20
-      "
-            aria-label="Entre em contato pelo WhatsApp"
+            aria-label="Conversar com o Dr. Emanuel pelo WhatsApp"
+            className="fixed bottom-5 right-5 z-40 flex size-16 items-center justify-center rounded-full bg-azul text-white shadow-[0_12px_28px_-10px_rgba(13,27,69,0.7)] ring-4 ring-ouro transition-transform duration-300 hover:-translate-y-1 sm:bottom-7 sm:right-7"
         >
-            <FaWhatsapp className="w-9 h-9" />
+            <FaWhatsapp className="size-8" aria-hidden="true" />
         </a>
-    );
-};
+    )
+}
