@@ -4,28 +4,21 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Phone, Mail, MapPin, ArrowRight, Clock, MessageSquare, Send } from "lucide-react"
-import { FaWhatsapp } from "react-icons/fa";
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
+import { ArrowUpRight, Clock, Mail, Send } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { useToast } from "@/hooks/use-toast"
+import { EMAIL, HORARIO, WHATSAPP_EXIBICAO, waLink } from "@/lib/contato"
 
 const formSchema = z.object({
-    name: z.string().min(2, "Nome obrigatório"),
-    email: z.string().email("Email inválido").or(z.literal('')),
-    phone: z.string().min(10, "Telefone inválido"),
-    message: z.string().min(5, "Escreva um pouco sobre seu caso"),
+    name: z.string().min(2, "Escreva seu nome"),
+    email: z.string().email("Esse e-mail parece incompleto").or(z.literal("")),
+    phone: z.string().min(10, "Coloque o número com DDD"),
+    message: z.string().min(5, "Conte um pouco sobre o seu caso"),
 })
+
+const campo =
+    "h-14 w-full rounded-md border-2 border-input bg-white px-4 text-lg text-azul-noite placeholder:text-muted-foreground/80 focus:border-azul focus:outline-none aria-[invalid=true]:border-destructive"
 
 export default function CTA() {
     const { toast } = useToast()
@@ -33,209 +26,162 @@ export default function CTA() {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            email: "",
-            phone: "",
-            message: "",
-        },
+        defaultValues: { name: "", email: "", phone: "", message: "" },
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsLoading(true)
-        await new Promise(resolve => setTimeout(resolve, 1500))
+        await new Promise((resolve) => setTimeout(resolve, 1500))
         console.log(values)
         toast({
-            title: "Mensagem Enviada!",
-            description: "Dr. Emanuel analisará seu caso em breve."
+            title: "Mensagem enviada!",
+            description: "Dr. Emanuel analisará seu caso em breve.",
         })
         form.reset()
         setIsLoading(false)
     }
 
     return (
-        // Mudei py-24 pra py-16 no mobile, e mantive md:py-24 no desktop
-        <section id="contato" className="py-16 md:py-24 bg-background relative overflow-hidden">
+        <section id="contato" className="bg-white py-20 lg:py-32">
+            <div className="mx-auto grid max-w-7xl items-start gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-20">
+                <div className="lg:sticky lg:top-28 lg:col-span-5">
+                    <h2 className="font-largo text-[2rem] uppercase leading-[1.02] text-azul sm:text-5xl">
+                        Vamos lutar pelo seu direito?
+                    </h2>
+                    <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
+                        Cada dia sem dar entrada é dinheiro perdido. Mande seu caso agora e receba uma análise com
+                        urgência.
+                    </p>
 
-            {/* Background com Grid Sutil */}
-            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.03] pointer-events-none" />
+                    <a
+                        href={waLink()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group mt-9 flex items-center gap-5 rounded-md bg-azul-noite p-5 text-white transition-colors hover:bg-azul sm:p-6"
+                    >
+                        <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-ouro text-azul-noite">
+                            <FaWhatsapp className="size-7" aria-hidden="true" />
+                        </span>
+                        <span className="min-w-0">
+                            <span className="block text-sm font-bold text-ouro-claro">Resposta mais rápida</span>
+                            <span className="block font-semilargo text-xl font-extrabold leading-tight sm:text-2xl">
+                                Chamar no WhatsApp
+                            </span>
+                            <span className="tabular mt-0.5 block text-base text-azul-nevoa">{WHATSAPP_EXIBICAO}</span>
+                        </span>
+                        <ArrowUpRight
+                            className="ml-auto size-6 shrink-0 text-ouro-claro transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            aria-hidden="true"
+                        />
+                    </a>
 
-            {/* Glows ajustados pra não estourarem no mobile */}
-            <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-primary/10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3" />
-            <div className="absolute bottom-0 left-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-primary/5 blur-[60px] md:blur-[100px] rounded-full pointer-events-none translate-y-1/3 -translate-x-1/3" />
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-start">
-
-                    {/* === LADO ESQUERDO: CHAMADA E CANAIS === */}
-                    {/* AQUI O PULO DO GATO: lg:sticky (só no desktop) */}
-                    <div className="lg:col-span-5 space-y-8 lg:space-y-10 animate-in fade-in-0 slide-in-from-left-8 duration-700 lg:sticky lg:top-24">
-
-                        <div>
-                            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-3 py-1 mb-4 lg:mb-6">
-                                <span className="relative flex h-2.5 w-2.5">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
-                                </span>
-                                <span className="text-xs font-bold text-primary tracking-wide uppercase">
-                                    Atendimento Online
-                                </span>
-                            </div>
-
-                            {/* Texto menor no mobile (3xl) e maior no desktop (5xl) */}
-                            <h2 className="text-3xl md:text-5xl font-extrabold text-foreground mb-3 lg:mb-4 leading-tight">
-                                Vamos lutar pelo <br />
-                                <span className="text-primary">seu direito?</span>
-                            </h2>
-                            <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
-                                Cada dia sem dar entrada é dinheiro perdido. Nossa equipe está pronta para analisar seu caso com urgência.
-                            </p>
+                    <dl className="mt-6 space-y-3 text-lg text-azul-noite">
+                        <div className="flex items-center gap-3">
+                            <dt>
+                                <Mail className="size-5 text-azul" aria-label="E-mail" />
+                            </dt>
+                            <dd className="break-all">
+                                <a href={`mailto:${EMAIL}`} className="hover:text-azul hover:underline">
+                                    {EMAIL}
+                                </a>
+                            </dd>
                         </div>
+                        <div className="flex items-center gap-3">
+                            <dt>
+                                <Clock className="size-5 text-azul" aria-label="Horário" />
+                            </dt>
+                            <dd>{HORARIO}</dd>
+                        </div>
+                    </dl>
+                </div>
 
-                        {/* Cards de Contato Rápido */}
-                        <div className="space-y-4">
-                            <a
-                                href="https://wa.me/5587996128608"
-                                target="_blank"
-                                className="flex items-center gap-4 lg:gap-5 p-4 lg:p-5 rounded-2xl border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all group cursor-pointer active:scale-95 duration-200"
+                <div className="rounded-md bg-cal p-6 sm:p-10 lg:col-span-7">
+                    <h3 className="font-semilargo text-2xl font-extrabold text-azul-noite">Prefere escrever? Envie seu caso</h3>
+                    <p className="mt-2 text-lg text-muted-foreground">Preencha os dados abaixo. Retornamos em até 24h.</p>
+
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-5">
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-base font-bold text-azul-noite">Nome completo</FormLabel>
+                                        <FormControl>
+                                            <input autoComplete="name" className={campo} {...field} />
+                                        </FormControl>
+                                        <FormMessage className="text-base" />
+                                    </FormItem>
+                                )}
+                            />
+                            <div className="grid gap-5 md:grid-cols-2">
+                                <FormField
+                                    control={form.control}
+                                    name="phone"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-base font-bold text-azul-noite">WhatsApp</FormLabel>
+                                            <FormControl>
+                                                <input
+                                                    type="tel"
+                                                    inputMode="tel"
+                                                    autoComplete="tel"
+                                                    placeholder="(DDD) 99999-9999"
+                                                    className={campo}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage className="text-base" />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="email"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-base font-bold text-azul-noite">
+                                                E-mail <span className="font-normal text-muted-foreground">(opcional)</span>
+                                            </FormLabel>
+                                            <FormControl>
+                                                <input type="email" autoComplete="email" className={campo} {...field} />
+                                            </FormControl>
+                                            <FormMessage className="text-base" />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <FormField
+                                control={form.control}
+                                name="message"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-base font-bold text-azul-noite">Como podemos ajudar?</FormLabel>
+                                        <FormControl>
+                                            <textarea
+                                                placeholder="Ex.: pedi aposentadoria rural e o INSS negou em março."
+                                                className={`${campo} h-auto min-h-[150px] resize-y py-3 leading-relaxed`}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className="text-base" />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="inline-flex h-16 w-full items-center justify-center gap-3 rounded-md bg-azul px-7 text-lg font-bold text-white transition-colors hover:bg-azul-noite disabled:cursor-wait disabled:opacity-70"
                             >
-                                <div className="h-10 w-10 lg:h-12 lg:w-12 bg-primary rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-                                    <FaWhatsapp className="h-5 w-5 lg:h-6 lg:w-6 text-primary-foreground" />
-                                </div>
-                                <div>
-                                    <p className="text-[10px] lg:text-xs font-bold uppercase tracking-wider text-primary opacity-80 mb-0.5 lg:mb-1">Resposta Rápida</p>
-                                    <p className="text-base lg:text-lg font-bold text-foreground">Chamar no WhatsApp</p>
-                                </div>
-                                <ArrowRight className="ml-auto h-4 w-4 lg:h-5 lg:w-5 text-primary group-hover:translate-x-1 transition-transform" />
-                            </a>
-
-                            <div className="p-5 lg:p-6 rounded-2xl border border-border bg-card shadow-sm space-y-3 lg:space-y-4">
-                                <div className="flex items-center gap-3 text-muted-foreground">
-                                    <Mail className="h-5 w-5 text-primary" />
-                                    <span className="text-sm font-medium break-all">emanuelsilvestre.adv@gmail.com</span>
-                                </div>
-                                <div className="w-full h-px bg-border/50" />
-                                <div className="flex items-center gap-3 text-muted-foreground">
-                                    <Clock className="h-5 w-5 text-primary" />
-                                    <span className="text-sm font-medium">Seg a Sex: 08h às 18h</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* === LADO DIREITO: FORMULÁRIO === */}
-                    <div className="lg:col-span-7">
-                        {/* Padding reduzido no mobile (p-6) pra ganhar espaço */}
-                        <div className="bg-card border border-border/50 p-6 sm:p-10 rounded-3xl shadow-2xl shadow-primary/5 animate-in fade-in-0 slide-in-from-right-8 duration-700 relative overflow-hidden">
-
-                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-
-                            <div className="mb-6 lg:mb-8">
-                                <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-2">Envie seu caso por e-mail</h3>
-                                <p className="text-sm lg:text-base text-muted-foreground">Preencha os dados abaixo. Retornaremos em até 24h.</p>
-                            </div>
-
-                            <Form {...form}>
-                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 lg:space-y-5">
-                                    <FormField
-                                        control={form.control}
-                                        name="name"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="font-semibold text-foreground/80">Nome Completo</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Seu nome completo"
-                                                        {...field}
-                                                        className="h-11 lg:h-12 rounded-xl bg-background border-input focus:border-primary focus:ring-primary/20 transition-all"
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    {/* No mobile vira coluna unica, no desk 2 colunas */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
-                                        <FormField
-                                            control={form.control}
-                                            name="phone"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel className="font-semibold text-foreground/80">WhatsApp</FormLabel>
-                                                    <FormControl>
-                                                        <Input
-                                                            placeholder="(DDD) 99999-9999"
-                                                            {...field}
-                                                            className="h-11 lg:h-12 rounded-xl bg-background border-input focus:border-primary focus:ring-primary/20 transition-all"
-                                                        />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                        <FormField
-                                            control={form.control}
-                                            name="email"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel className="font-semibold text-foreground/80">Email (Opcional)</FormLabel>
-                                                    <FormControl>
-                                                        <Input
-                                                            placeholder="seu@email.com"
-                                                            {...field}
-                                                            className="h-11 lg:h-12 rounded-xl bg-background border-input focus:border-primary focus:ring-primary/20 transition-all"
-                                                        />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
-
-                                    <FormField
-                                        control={form.control}
-                                        name="message"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="font-semibold text-foreground/80">Como podemos ajudar?</FormLabel>
-                                                <FormControl>
-                                                    <Textarea
-                                                        placeholder="Descreva seu problema..."
-                                                        className="min-h-[120px] lg:min-h-[140px] resize-none rounded-xl bg-background border-input focus:border-primary focus:ring-primary/20 p-4 transition-all"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    <Button
-                                        type="submit"
-                                        className="w-full h-12 lg:h-14 text-base lg:text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all mt-4"
-                                        disabled={isLoading}
-                                    >
-                                        {isLoading ? (
-                                            <span className="flex items-center gap-2">
-                                                Enviando...
-                                            </span>
-                                        ) : (
-                                            <span className="flex items-center gap-2">
-                                                Solicitar Análise Gratuita
-                                                <Send className="h-4 w-4 lg:h-5 lg:w-5 ml-1" />
-                                            </span>
-                                        )}
-                                    </Button>
-
-                                    <p className="text-center text-[10px] lg:text-xs text-muted-foreground mt-4 flex items-center justify-center gap-1">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                                        Seus dados estão protegidos por sigilo advocatício.
-                                    </p>
-                                </form>
-                            </Form>
-                        </div>
-                    </div>
+                                {isLoading ? "Enviando…" : "Solicitar análise gratuita"}
+                                {!isLoading && <Send className="size-5" aria-hidden="true" />}
+                            </button>
+                            <p className="text-center text-sm text-muted-foreground">
+                                Seus dados estão protegidos por sigilo advocatício.
+                            </p>
+                        </form>
+                    </Form>
                 </div>
             </div>
         </section>

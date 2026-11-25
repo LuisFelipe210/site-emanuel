@@ -1,41 +1,33 @@
-"use client"
-
-import { useState } from "react"
-// Voltando para o alias @/ que deve funcionar com o tsconfig corrigido
 import Navigation from "@/components/navigation"
 import Hero from "@/components/hero"
-import Authority from "@/components/authority"
 import Services from "@/components/services"
+import Process from "@/components/process"
+import QuizDireito from "@/components/quiz-direito"
+import About from "@/components/about"
 import LeadMagnet from "@/components/lead-magnet"
-import Testimonials from "@/components/testimonials"
 import FAQ from "@/components/faq"
 import CTA from "@/components/cta"
 import Footer from "@/components/footer"
-import About from "@/components/about"
+import DadosEstruturados from "@/components/dados-estruturados"
 
+// Números (+100 benefícios, R$ 1 Mi+) e depoimentos saíram da página até o cliente confirmar.
+// Os componentes authority.tsx e testimonials.tsx continuam no projeto para quando forem confirmados.
 export default function Home() {
     return (
-            <main
-            >
-                <Navigation />
-
+        <>
+            <DadosEstruturados />
+            <Navigation />
+            <main>
                 <Hero />
-
-                <Authority />
-
                 <Services />
-
+                <QuizDireito />
+                <Process />
                 <About />
-
                 <LeadMagnet />
-
-                <Testimonials />
-
                 <FAQ />
-
                 <CTA />
-
-                <Footer />
             </main>
+            <Footer />
+        </>
     )
 }

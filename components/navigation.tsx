@@ -1,185 +1,149 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Menu, X, Phone, Sun, Moon, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes"
-import Link from "next/link"
-import Image from "next/image"
+import { useEffect, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { FaWhatsapp } from "react-icons/fa"
+import { HORARIO, waLink } from "@/lib/contato"
 
-function ThemeToggleButton() {
-    const { setTheme, theme } = useTheme()
-    const [mounted, setMounted] = useState(false)
-
-    useEffect(() => setMounted(true), [])
-
-    if (!mounted) return <div className="h-9 w-9" />
-
-    return (
-        <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="rounded-full h-9 w-9 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
-        >
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Alternar tema</span>
-        </Button>
-    )
-}
+const links = [
+    { label: "Áreas de atuação", href: "/#servicos" },
+    { label: "Tenho direito?", href: "/#tenho-direito" },
+    { label: "Como funciona", href: "/#como-funciona" },
+    { label: "Sobre", href: "/#sobre" },
+    { label: "Dúvidas", href: "/#faq" },
+    { label: "Contato", href: "/#contato" },
+]
 
 export default function Navigation() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [scrolled, setScrolled] = useState(false)
+    const [aberto, setAberto] = useState(false)
+    const [rolou, setRolou] = useState(false)
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 20)
-        window.addEventListener("scroll", onScroll)
+        const onScroll = () => setRolou(window.scrollY > 24)
+        onScroll()
+        window.addEventListener("scroll", onScroll, { passive: true })
         return () => window.removeEventListener("scroll", onScroll)
     }, [])
 
-    // Travar scroll quando menu mobile abre
     useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-    }, [isMenuOpen]);
-
-    const links = [
-        { label: "Início", href: "#home" },
-        { label: "Áreas de Atuação", href: "#servicos" },
-        { label: "Sobre", href: "#sobre" },
-        { label: "Depoimentos", href: "#depoimentos" },
-        { label: "Dúvidas", href: "#faq" },
-    ]
+        document.body.style.overflow = aberto ? "hidden" : ""
+        const onKey = (e: KeyboardEvent) => e.key === "Escape" && setAberto(false)
+        window.addEventListener("keydown", onKey)
+        return () => window.removeEventListener("keydown", onKey)
+    }, [aberto])
 
     return (
         <>
             <header
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
-                    scrolled
-                        ? "py-3 bg-background/80 backdrop-blur-xl shadow-sm border-b border-primary/10"
-                        : "py-6 bg-transparent"
-                }`}
+                className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,padding] duration-500 ${
+                    rolou && !aberto ? "bg-cal/95 py-2.5 shadow-[0_1px_0_var(--border)]" : "py-4 lg:py-6"
+                } ${aberto ? "bg-transparent" : ""}`}
             >
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center">
-
-                        {/* --- LOGO --- */}
-                        <Link
-                            href="/"
-                            className="flex items-center gap-3 group relative z-50 shrink-0"
-                        >
-                                <Image
-                                    src="/logo.png"
-                                    alt="ES"
-                                    width={60}
-                                    height={60}
-                                    className="object-contain p-1"
-                                />
-                        </Link>
-
-                        {/* --- MENU DESKTOP --- */}
-                        <div className="hidden lg:flex items-center">
-                            <nav className={`flex items-center gap-1 p-1.5 rounded-full transition-all duration-500 ${
-                                scrolled
-                                    ? "bg-transparent"
-                                    : "bg-background/40 backdrop-blur-md border border-white/10 dark:border-white/5 shadow-lg"
-                            }`}>
-                                <ul className="flex items-center px-2">
-                                    {links.map((link) => (
-                                        <li key={link.href}>
-                                            <Link
-                                                href={link.href}
-                                                className="text-sm font-bold text-foreground/80 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-full transition-all duration-300"
-                                            >
-                                                {link.label}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <div className="h-5 w-px bg-border/50 mx-1" />
-
-                                <div className="flex items-center gap-2 pl-2 pr-1">
-                                    <ThemeToggleButton />
-                                    <Button
-                                        asChild
-                                        size="sm"
-                                        className="rounded-full font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:-translate-y-0.5"
-                                    >
-                                        <Link href="#contato">
-                                            Agendar
-                                            <ArrowRight className="ml-1 h-3 w-3" />
-                                        </Link>
-                                    </Button>
-                                </div>
-                            </nav>
-                        </div>
-
-                        {/* --- MENU MOBILE TOGGLE --- */}
-                        <div className="lg:hidden flex items-center gap-3">
-                            <ThemeToggleButton />
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="relative z-50 hover:bg-primary/10 text-foreground"
+                <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+                    <a href="/" className="relative z-50 flex items-center gap-3" onClick={() => setAberto(false)}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/monograma.svg" alt="" className="h-8 w-auto lg:h-9" />
+                        <span className="leading-none">
+                            <span
+                                className={`block whitespace-nowrap font-semilargo text-[0.98rem] font-extrabold transition-colors sm:text-[1.05rem] ${
+                                    aberto ? "text-white" : "text-azul-noite"
+                                }`}
                             >
-                                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                            </Button>
-                        </div>
-                    </div>
+                                Emanuel Silvestre
+                            </span>
+                            <span className={`mt-1 block text-[0.8rem] ${aberto ? "text-azul-claro" : "text-muted-foreground"}`}>
+                                Advocacia Previdenciária
+                            </span>
+                        </span>
+                    </a>
+
+                    <nav aria-label="Principal" className="hidden items-center gap-1 xl:flex">
+                        {links.map((l) => (
+                            <a
+                                key={l.href}
+                                href={l.href}
+                                className="rounded-sm px-3.5 py-2 text-[1.02rem] font-bold text-azul-noite underline decoration-transparent decoration-2 transition-colors hover:text-azul hover:decoration-ouro"
+                            >
+                                {l.label}
+                            </a>
+                        ))}
+                        <a
+                            href={waLink("Olá! Vim pelo site e gostaria de agendar uma consulta.")}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ml-4 inline-flex h-12 items-center gap-2.5 rounded-md bg-azul px-5 font-bold text-white transition-colors hover:bg-azul-noite"
+                        >
+                            <FaWhatsapp className="size-5 text-ouro-claro" aria-hidden="true" />
+                            Agendar
+                        </a>
+                    </nav>
+
+                    <button
+                        type="button"
+                        onClick={() => setAberto((v) => !v)}
+                        aria-expanded={aberto}
+                        aria-controls="menu-mobile"
+                        className={`relative z-50 flex h-12 items-center gap-2.5 rounded-md px-3 font-bold xl:hidden ${
+                            aberto ? "text-white" : "text-azul-noite"
+                        }`}
+                    >
+                        <span className="text-base">{aberto ? "Fechar" : "Menu"}</span>
+                        <span className="relative block h-4 w-6" aria-hidden="true">
+                            <span
+                                className={`absolute left-0 top-0.5 h-0.5 w-6 bg-current transition-transform duration-300 ${
+                                    aberto ? "translate-y-1.5 rotate-45" : ""
+                                }`}
+                            />
+                            <span
+                                className={`absolute bottom-0.5 left-0 h-0.5 w-6 bg-current transition-transform duration-300 ${
+                                    aberto ? "-translate-y-1.5 -rotate-45" : ""
+                                }`}
+                            />
+                        </span>
+                    </button>
                 </div>
             </header>
 
-            {/* --- MOBILE OVERLAY (FADE IN / FADE OUT) --- */}
-            {/* Mudei aqui: Tirei o translate-y e deixei só opacity e visibility */}
-            <div
-                className={`fixed inset-0 z-40 bg-background/95 backdrop-blur-xl lg:hidden transition-all duration-300 ${
-                    isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-                }`}
-            >
-                {/* Elementos decorativos no menu mobile */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-
-                <div className="flex flex-col h-full justify-center items-center px-6 gap-8">
-
-                    <nav className="flex flex-col items-center gap-6">
-                        {links.map((link, index) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                onClick={() => setIsMenuOpen(false)}
-                                className="text-3xl font-bold text-foreground hover:text-primary transition-colors tracking-tight"
+            <AnimatePresence>
+                {aberto && (
+                    <motion.div
+                        id="menu-mobile"
+                        className="fixed inset-0 z-[45] flex flex-col bg-azul-noite px-5 pb-10 pt-28 xl:hidden"
+                        initial={{ clipPath: "inset(0 0 100% 0)" }}
+                        animate={{ clipPath: "inset(0 0 0% 0)" }}
+                        exit={{ clipPath: "inset(0 0 100% 0)" }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <nav aria-label="Menu" className="flex flex-col">
+                            {links.map((l, i) => (
+                                <motion.a
+                                    key={l.href}
+                                    href={l.href}
+                                    onClick={() => setAberto(false)}
+                                    className="border-b border-white/15 py-4 font-largo text-[1.6rem] uppercase leading-tight text-white"
+                                    initial={{ y: 24, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.12 + i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                >
+                                    {l.label}
+                                </motion.a>
+                            ))}
+                        </nav>
+                        <div className="mt-auto">
+                            <a
+                                href={waLink("Olá! Vim pelo site e gostaria de agendar uma consulta.")}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex h-16 items-center justify-center gap-3 rounded-md bg-ouro text-lg font-bold text-azul-noite"
                             >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </nav>
-
-                    <div className="w-16 h-1 bg-primary/20 rounded-full" />
-
-                    <div className="flex flex-col gap-4 w-full max-w-xs">
-                        <Button
-                            asChild
-                            size="lg"
-                            className="w-full text-lg font-bold h-14 rounded-2xl shadow-xl shadow-primary/20"
-                        >
-                            <Link href="#contato" onClick={() => setIsMenuOpen(false)}>
-                                <Phone className="mr-2 h-5 w-5" />
-                                Consulta Gratuita
-                            </Link>
-                        </Button>
-                        <p className="text-center text-xs text-muted-foreground uppercase tracking-widest">
-                            Seg - Sex • 08h às 18h
-                        </p>
-                    </div>
-                </div>
-            </div>
+                                <FaWhatsapp className="size-6" aria-hidden="true" />
+                                Consulta pelo WhatsApp
+                            </a>
+                            <p className="mt-4 text-center text-base text-azul-claro">{HORARIO}</p>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     )
 }
